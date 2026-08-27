@@ -13,6 +13,4 @@ django.setup()
 
 from config.wsgi import application
 
-def handler(request):
-    """ASGI handler for Vercel serverless functions"""
-    return application(request)
+app = application
