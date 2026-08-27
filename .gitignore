@@ -6,8 +6,6 @@ __pycache__/
 .env
 media/
 staticfiles/
-.vscode/
-
 # Local secrets and generated files
 *.log
 
