@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Products</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f5f5f5;
+font-family:Arial, sans-serif;
+}
+
+.container{
+margin-top:40px;
+}
+.product-card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+transition:.3s;
+position:relative;
+}
+
+.product-card:hover{
+transform:translateY(-8px);
+}
+
+.product-card img{
+height:220px;
+object-fit:contain;
+padding:15px;
+background:white;
+}
+
+.offer{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:red;
+    color:#fff;
+    padding:5px 10px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+
+
+.discount{
+position:absolute;
+top:10px;
+left:10px;
+background:red;
+color:#fff;
+padding:5px 10px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
+}
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#28a745;
+}
+
+.old-price{
+text-decoration:line-through;
+color:gray;
+}
+
+.rating{
+color:orange;
+font-size:18px;
+}
+
+.btn-cart{
+background:#ff9800;
+color:white;
+}
+
+.btn-buy{
+background:#28a745;
+color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="row g-4">
+
+<!-- Product 1 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">25% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg" class="w-100">
+<div class="p-3">
+<h5>iPhone 16</h5>
+<div class="rating">★★★★★</div>
+<p>
+<span class="price">₹74,999</span><br>
+<span class="old-price">₹99,999</span>
+</p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('iPhone 16', 74999, 'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('iPhone 16', 74999, 'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">20% OFF</div>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT4n8fx9KaxMm7hFItnbDQQu5zQ5UcKYigMyqKEm2qvWMOl60isKMifwgaTRWGTTwgAt42Hn9Lkox3UOeB1XsaRScEbf5OGazN0aZbOwM6-x-janWW676XbkQ" class="w-100">
+<div class="p-3">
+<h5>Samsung S25 Ultra</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹1,09,999</span><br><span class="old-price">₹1,29,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Samsung S25 Ultra', 109999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT4n8fx9KaxMm7hFItnbDQQu5zQ5UcKYigMyqKEm2qvWMOl60isKMifwgaTRWGTTwgAt42Hn9Lkox3UOeB1XsaRScEbf5OGazN0aZbOwM6-x-janWW676XbkQ')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Samsung S25 Ultra', 109999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT4n8fx9KaxMm7hFItnbDQQu5zQ5UcKYigMyqKEm2qvWMOl60isKMifwgaTRWGTTwgAt42Hn9Lkox3UOeB1XsaRScEbf5OGazN0aZbOwM6-x-janWW676XbkQ')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">18% OFF</div>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSvksXl_a4GczTR_wr-g0pvC2Tt56p69a2Odp0G-vPYwEpz2YSdzT_lf-ITUUZc505TNJmGCQXy2bcAm40Sys3dVPQXdQgLUElvEqschZ7F0M-rJsAIXBeI" class="w-100">
+<div class="p-3">
+<h5>Google Pixel 9 Pro</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹84,999</span><br><span class="old-price">₹99,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Google Pixel 9 Pro', 84999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSvksXl_a4GczTR_wr-g0pvC2Tt56p69a2Odp0G-vPYwEpz2YSdzT_lf-ITUUZc505TNJmGCQXy2bcAm40Sys3dVPQXdQgLUElvEqschZ7F0M-rJsAIXBeI')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Google Pixel 9 Pro', 84999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSvksXl_a4GczTR_wr-g0pvC2Tt56p69a2Odp0G-vPYwEpz2YSdzT_lf-ITUUZc505TNJmGCQXy2bcAm40Sys3dVPQXdQgLUElvEqschZ7F0M-rJsAIXBeI')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 4 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">30% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/oneplus-13.jpg" class="w-100">
+<div class="p-3">
+<h5>OnePlus 13</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹59,999</span><br><span class="old-price">₹84,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('OnePlus 13', 59999, 'https://fdn2.gsmarena.com/vv/bigpic/oneplus-13.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('OnePlus 13', 59999, 'https://fdn2.gsmarena.com/vv/bigpic/oneplus-13.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 5 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">15% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/xiaomi-15.jpg" class="w-100">
+<div class="p-3">
+<h5>Xiaomi 15</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹54,999</span><br><span class="old-price">₹64,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Xiaomi 15', 54999, 'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-15.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Xiaomi 15', 54999, 'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-15.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 6 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">22% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/vivo-x200-pro.jpg" class="w-100">
+<div class="p-3">
+<h5>Vivo X200 Pro</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹79,999</span><br><span class="old-price">₹99,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Vivo X200 Pro', 79999, 'https://fdn2.gsmarena.com/vv/bigpic/vivo-x200-pro.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Vivo X200 Pro', 79999, 'https://fdn2.gsmarena.com/vv/bigpic/vivo-x200-pro.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 7 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">28% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/oppo-find-x8-pro.jpg" class="w-100">
+<div class="p-3">
+<h5>Oppo Find X8 Pro</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹74,999</span><br><span class="old-price">₹94,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Oppo Find X8 Pro', 74999, 'https://fdn2.gsmarena.com/vv/bigpic/oppo-find-x8-pro.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Oppo Find X8 Pro', 74999, 'https://fdn2.gsmarena.com/vv/bigpic/oppo-find-x8-pro.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 8 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">20% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/realme-gt7-pro.jpg" class="w-100">
+<div class="p-3">
+<h5>Realme GT 7 Pro</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹44,999</span><br><span class="old-price">₹55,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Realme GT 7 Pro', 44999, 'https://fdn2.gsmarena.com/vv/bigpic/realme-gt7-pro.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Realme GT 7 Pro', 44999, 'https://fdn2.gsmarena.com/vv/bigpic/realme-gt7-pro.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 9 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">35% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/nothing-phone3.jpg" class="w-100">
+<div class="p-3">
+<h5>Nothing Phone 3</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹49,999</span><br><span class="old-price">₹69,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Nothing Phone 3', 49999, 'https://fdn2.gsmarena.com/vv/bigpic/nothing-phone3.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Nothing Phone 3', 49999, 'https://fdn2.gsmarena.com/vv/bigpic/nothing-phone3.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 10 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">25% OFF</div>
+<img src="https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-60-pro.jpg" class="w-100">
+<div class="p-3">
+<h5>Motorola Edge 60 Pro</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹39,999</span><br><span class="old-price">₹54,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Motorola Edge 60 Pro', 39999, 'https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-60-pro.jpg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Motorola Edge 60 Pro', 39999, 'https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-60-pro.jpg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 11 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">18% OFF</div>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSfNX0G6hS3HUma4WvJveIEdkG3cbJWuaT0Re91Hx7-nhAyhmIUx8c_c95F9g_ZeidlDEqXsy0nFiTj5I4brxtr41KizAsxiyB-WxcbN0dyY8fahQFlqhea" class="w-100">
+<div class="p-3">
+<h5>iQOO 13</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹54,999</span><br><span class="old-price">₹66,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('iQOO 13', 54999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSfNX0G6hS3HUma4WvJveIEdkG3cbJWuaT0Re91Hx7-nhAyhmIUx8c_c95F9g_ZeidlDEqXsy0nFiTj5I4brxtr41KizAsxiyB-WxcbN0dyY8fahQFlqhea')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('iQOO 13', 54999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSfNX0G6hS3HUma4WvJveIEdkG3cbJWuaT0Re91Hx7-nhAyhmIUx8c_c95F9g_ZeidlDEqXsy0nFiTj5I4brxtr41KizAsxiyB-WxcbN0dyY8fahQFlqhea')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 12 -->
+<div class="col-md-3">
+<div class="product-card">
+<div class="discount">40% OFF</div>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR2gWKMywT86U6oycr68PgVnMMsWJ-SOFciz47M9VZvLKDiL82jiCsbtU-IKXNoV_9ReTAZUz8uFL6eF9QO6kXhCAY2XeAocdl3r9i-e6JnEVU6NCgwClx6bg" class="w-100">
+<div class="p-3">
+<h5>Redmi Note 14 Pro+</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹29,999</span><br><span class="old-price">₹49,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Redmi Note 14 Pro+', 29999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR2gWKMywT86U6oycr68PgVnMMsWJ-SOFciz47M9VZvLKDiL82jiCsbtU-IKXNoV_9ReTAZUz8uFL6eF9QO6kXhCAY2XeAocdl3r9i-e6JnEVU6NCgwClx6bg')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Redmi Note 14 Pro+', 29999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR2gWKMywT86U6oycr68PgVnMMsWJ-SOFciz47M9VZvLKDiL82jiCsbtU-IKXNoV_9ReTAZUz8uFL6eF9QO6kXhCAY2XeAocdl3r9i-e6JnEVU6NCgwClx6bg')">Buy Now</button>
+</div>
+</div>
+</div>
+
+</div>
+<div class="container py-5">
+
+<div class="row g-4">
+
+<!-- Product 1 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">20% OFF</span>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw" alt="MacBook Air M4">
+<div class="p-3">
+<h5>MacBook Air M4</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹94,999</span><br><span class="old-price">₹1,19,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('MacBook Air M4', 94999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('MacBook Air M4', 94999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">25% OFF</span>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRa3ecvCbBjVFHwY4XfYTNCnUY3sgu_ZRK7hcHv8Ifr6tqbKDEkhhluEzxWnFREUpR8rXc4KoMT-ibdgXB_ZQ72GN58YdEK3HIktGPyO5H-2kgmNL8d0oNI" alt="Dell XPS 14">
+<div class="p-3">
+<h5>Dell XPS 14</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹1,24,999</span><br><span class="old-price">₹1,59,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Dell XPS 14', 124999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRa3ecvCbBjVFHwY4XfYTNCnUY3sgu_ZRK7hcHv8Ifr6tqbKDEkhhluEzxWnFREUpR8rXc4KoMT-ibdgXB_ZQ72GN58YdEK3HIktGPyO5H-2kgmNL8d0oNI')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Dell XPS 14', 124999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRa3ecvCbBjVFHwY4XfYTNCnUY3sgu_ZRK7hcHv8Ifr6tqbKDEkhhluEzxWnFREUpR8rXc4KoMT-ibdgXB_ZQ72GN58YdEK3HIktGPyO5H-2kgmNL8d0oNI')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">30% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTtEKXmycISiYOJesFnJYBvQXn6Z3KUlCtHGxaTYKIwyfD92RI1feHvHneAA4Anu1iOdZCBKbyHcitIdm608xezOJHilhIgbBUBVaE_4Hc" alt="HP Spectre x360">
+<div class="p-3">
+<h5>HP Spectre x360</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹1,09,999</span><br><span class="old-price">₹1,49,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('HP Spectre x360', 109999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTtEKXmycISiYOJesFnJYBvQXn6Z3KUlCtHGxaTYKIwyfD92RI1feHvHneAA4Anu1iOdZCBKbyHcitIdm608xezOJHilhIgbBUBVaE_4Hc')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('HP Spectre x360', 109999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTtEKXmycISiYOJesFnJYBvQXn6Z3KUlCtHGxaTYKIwyfD92RI1feHvHneAA4Anu1iOdZCBKbyHcitIdm608xezOJHilhIgbBUBVaE_4Hc')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 4 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">18% OFF</span>
+<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQvZxhwDct8Jxm6FM4kStxJdpKmaV4XB6HehThfCQ0TqElPoWmlGHOJSBNZPCWfcy9QMUmYSaU4-41sqr5U4tbRxhpaiv594_c1Fdvmr-Pcb_TfhPGcPQ50RwicCzyIJCFv4rVhW_QUYQ&usqp=CAc" alt="Lenovo Legion Pro 7">
+<div class="p-3">
+<h5>Lenovo Legion Pro 7</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹1,79,999</span><br><span class="old-price">₹2,19,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Lenovo Legion Pro 7', 179999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQvZxhwDct8Jxm6FM4kStxJdpKmaV4XB6HehThfCQ0TqElPoWmlGHOJSBNZPCWfcy9QMUmYSaU4-41sqr5U4tbRxhpaiv594_c1Fdvmr-Pcb_TfhPGcPQ50RwicCzyIJCFv4rVhW_QUYQ&usqp=CAc')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Lenovo Legion Pro 7', 179999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQvZxhwDct8Jxm6FM4kStxJdpKmaV4XB6HehThfCQ0TqElPoWmlGHOJSBNZPCWfcy9QMUmYSaU4-41sqr5U4tbRxhpaiv594_c1Fdvmr-Pcb_TfhPGcPQ50RwicCzyIJCFv4rVhW_QUYQ&usqp=CAc')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 5 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">22% OFF</span>
+<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR6zDeLOo4mltAu7NKvg0JtscLxaxFC7EDydQtSf3QzaCkh4itFWw6uVupyuyUsKO7Nrzzxnl2YILcoS8e7rJFkM5XwGmVm8wPyeDkDhub4m9U--fKNEoPw" alt="ASUS ROG Zephyrus G16">
+<div class="p-3">
+<h5>Asus ROG Zephyrus G16</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹1,64,999</span><br><span class="old-price">₹2,09,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Asus ROG Zephyrus G16', 164999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR6zDeLOo4mltAu7NKvg0JtscLxaxFC7EDydQtSf3QzaCkh4itFWw6uVupyuyUsKO7Nrzzxnl2YILcoS8e7rJFkM5XwGmVm8wPyeDkDhub4m9U--fKNEoPw')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Asus ROG Zephyrus G16', 164999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR6zDeLOo4mltAu7NKvg0JtscLxaxFC7EDydQtSf3QzaCkh4itFWw6uVupyuyUsKO7Nrzzxnl2YILcoS8e7rJFkM5XwGmVm8wPyeDkDhub4m9U--fKNEoPw')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 6 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">15% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRjhwLueOSIwXYwbQ8xN6_jPNrnvQ4BbBuJHGybnCFod1cpb-lu7aikgAuLgzGrm9gwCPjJwhdB7s8JuF76uK481mHNpPPrz3tBPl4Upqk" alt="Acer Predator Helios Neo 16">
+<div class="p-3">
+<h5>Acer Predator Neo 16</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹1,14,999</span><br><span class="old-price">₹1,34,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Acer Predator Neo 16', 114999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRjhwLueOSIwXYwbQ8xN6_jPNrnvQ4BbBuJHGybnCFod1cpb-lu7aikgAuLgzGrm9gwCPjJwhdB7s8JuF76uK481mHNpPPrz3tBPl4Upqk')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Acer Predator Neo 16', 114999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRjhwLueOSIwXYwbQ8xN6_jPNrnvQ4BbBuJHGybnCFod1cpb-lu7aikgAuLgzGrm9gwCPjJwhdB7s8JuF76uK481mHNpPPrz3tBPl4Upqk')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 7 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">20% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT703sYwKe9Lt70SoTUpAcIIA6w0xJpBWUz8TadRTH8zr5bVLGd4vLFY8a2eOWKjjng_dPRjlfE5fkDiCGi00wo9_pThmFxY2ttRLBO9_OtMWX2vAsUghgPdQ" alt="MSI Raider GE78">
+<div class="p-3">
+<h5>MSI Raider GE78</h5>
+<div class="rating">★★★★★</div>
+<p><span class="price">₹2,09,999</span><br><span class="old-price">₹2,59,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('MSI Raider GE78', 209999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT703sYwKe9Lt70SoTUpAcIIA6w0xJpBWUz8TadRTH8zr5bVLGd4vLFY8a2eOWKjjng_dPRjlfE5fkDiCGi00wo9_pThmFxY2ttRLBO9_OtMWX2vAsUghgPdQ')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('MSI Raider GE78', 209999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT703sYwKe9Lt70SoTUpAcIIA6w0xJpBWUz8TadRTH8zr5bVLGd4vLFY8a2eOWKjjng_dPRjlfE5fkDiCGi00wo9_pThmFxY2ttRLBO9_OtMWX2vAsUghgPdQ')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 8 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">17% OFF</span>
+<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSdaeHGu_hkL1tO7kxYMJK83oXIsL-iWj3bMoyYZiPqSxZg2EkrRYe9PulTXSkrgCOO4kE7EoLgwn1D8iooldwTIAG0Utv8zs6MCagKC6Zx" alt="Samsung Galaxy Book5 Pro">
+<div class="p-3">
+<h5>Galaxy Book5 Pro</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹1,09,999</span><br><span class="old-price">₹1,32,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Samsung Galaxy Book5 Pro', 109999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSdaeHGu_hkL1tO7kxYMJK83oXIsL-iWj3bMoyYZiPqSxZg2EkrRYe9PulTXSkrgCOO4kE7EoLgwn1D8iooldwTIAG0Utv8zs6MCagKC6Zx')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Samsung Galaxy Book5 Pro', 109999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSdaeHGu_hkL1tO7kxYMJK83oXIsL-iWj3bMoyYZiPqSxZg2EkrRYe9PulTXSkrgCOO4kE7EoLgwn1D8iooldwTIAG0Utv8zs6MCagKC6Zx')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 9 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">35% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRlDM4dp30fRPiTJogv97jSuFXFKlCy8tW7utxSoKe3G63ZfgrEJy66rOWEoMAjxchJwzOqzSFXU8R1cmJO_6hYRMUlSyZLH01zEMUEVE5lxLqTXZvdQENE" alt="HP Victus 15">
+<div class="p-3">
+<h5>HP Victus 15</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹69,999</span><br><span class="old-price">₹99,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('HP Victus 15', 69999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRlDM4dp30fRPiTJogv97jSuFXFKlCy8tW7utxSoKe3G63ZfgrEJy66rOWEoMAjxchJwzOqzSFXU8R1cmJO_6hYRMUlSyZLH01zEMUEVE5lxLqTXZvdQENE')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('HP Victus 15', 69999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRlDM4dp30fRPiTJogv97jSuFXFKlCy8tW7utxSoKe3G63ZfgrEJy66rOWEoMAjxchJwzOqzSFXU8R1cmJO_6hYRMUlSyZLH01zEMUEVE5lxLqTXZvdQENE')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 10 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">28% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV5derhSHcbcbm2iZgw0XKwIM3S7GFS75dG19AFoEg-D_bt1l1me6hD_ZFYgHlUpLiUAoS2Qr6Oz0Ex0BbvllzP00EyBYlwDQqbyQI8daElr9WRQ0GgcSj" alt="ASUS Vivobook S15">
+<div class="p-3">
+<h5>ASUS Vivobook S15</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹74,999</span><br><span class="old-price">₹1,04,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('ASUS Vivobook S15', 74999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV5derhSHcbcbm2iZgw0XKwIM3S7GFS75dG19AFoEg-D_bt1l1me6hD_ZFYgHlUpLiUAoS2Qr6Oz0Ex0BbvllzP00EyBYlwDQqbyQI8daElr9WRQ0GgcSj')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('ASUS Vivobook S15', 74999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSV5derhSHcbcbm2iZgw0XKwIM3S7GFS75dG19AFoEg-D_bt1l1me6hD_ZFYgHlUpLiUAoS2Qr6Oz0Ex0BbvllzP00EyBYlwDQqbyQI8daElr9WRQ0GgcSj')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 11 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">25% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSDx8AhLBuNBljzUq1K_9O7_5fr-vbWsX18UhAJkIgiekbXATv_MGLBYoX4ex1xv3WtUPuXl9svJk1dH8EJ9BwDZsx9MgMfPZw5JLy6UOh92gtOU6maS62wgQ" alt="Lenovo IdeaPad Slim 5">
+<div class="p-3">
+<h5>IdeaPad Slim 5</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹59,999</span><br><span class="old-price">₹79,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Lenovo IdeaPad Slim 5', 59999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSDx8AhLBuNBljzUq1K_9O7_5fr-vbWsX18UhAJkIgiekbXATv_MGLBYoX4ex1xv3WtUPuXl9svJk1dH8EJ9BwDZsx9MgMfPZw5JLy6UOh92gtOU6maS62wgQ')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Lenovo IdeaPad Slim 5', 59999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSDx8AhLBuNBljzUq1K_9O7_5fr-vbWsX18UhAJkIgiekbXATv_MGLBYoX4ex1xv3WtUPuXl9svJk1dH8EJ9BwDZsx9MgMfPZw5JLy6UOh92gtOU6maS62wgQ')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- Product 12 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="product-card">
+<span class="discount">32% OFF</span>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR02Gc3rYyDesSFieTJRbm_WzdIk1Xb13kEXb4gLyPXVplhzh8smPVuMrkOcZJG0_7msXJrJOr5kX1SIdyYBzjtfZKgaXl2xwPN1m1XwfM2acLqDRCKKfGoLQ" alt="Dell Inspiron 15">
+<div class="p-3">
+<h5>Dell Inspiron 15</h5>
+<div class="rating">★★★★☆</div>
+<p><span class="price">₹54,999</span><br><span class="old-price">₹80,999</span></p>
+<button class="btn btn-cart w-100 mb-2" onclick="addToCart('Dell Inspiron 15', 54999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR02Gc3rYyDesSFieTJRbm_WzdIk1Xb13kEXb4gLyPXVplhzh8smPVuMrkOcZJG0_7msXJrJOr5kX1SIdyYBzjtfZKgaXl2xwPN1m1XwfM2acLqDRCKKfGoLQ')">Add to Cart</button>
+<button class="btn btn-buy w-100" onclick="buyNow('Dell Inspiron 15', 54999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR02Gc3rYyDesSFieTJRbm_WzdIk1Xb13kEXb4gLyPXVplhzh8smPVuMrkOcZJG0_7msXJrJOr5kX1SIdyYBzjtfZKgaXl2xwPN1m1XwfM2acLqDRCKKfGoLQ')">Buy Now</button>
+</div>
+</div>
+</div>
+
+</div>
+<div class="row g-4">
+
+<!-- 1 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">30% OFF</span>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4" class="card-img-top p-3" height="220" style="object-fit:contain;">
+<div class="card-body text-center">
+<h5>Sony WH-1000XM5</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹24,999</h4>
+<del class="text-muted">₹35,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2"onclick="addToCart('Sony WH-1000XM5', 24999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Sony WH-1000XM5', 24999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">25% OFF</span>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQQvof7FaZLP4RTFVQ1dND50QYqKWxE9Odl8OsXBKjeZcB9RHVO6IFCi7BYU28nZjsiUszvMTg4EcOqusMLMsFxi2pO9iOQ-95z816ljng0wJd_NbTHGhBH_ts" class="card-img-top p-3" height="220" style="object-fit:contain;">
+<div class="card-body text-center">
+<h5>Apple AirPods Max</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹49,999</h4>
+<del>₹66,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2"onclick="addToCart('Apple AirPods Max',49999,'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Apple AirPods Max',49999,'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">20% OFF</span>
+<img src="data:image/webp;base64,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" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Bose QC Ultra</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹29,999</h4>
+<del>₹37,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2"onclick="addToCart('Bose QC Ultra',37999,''https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7-wMilkR-96GIqHMQgblencvKkNK5lMaHYQ2RbnYob4X6lraHQlECOSzcanozWMgWDSoHTIUzLqFse_zkSogjYU1eaF3-HxygJsSsK539wTh9s3UTLcDV)">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Bose UC Ultra',37999,'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">35% OFF</span>
+<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7-wMilkR-96GIqHMQgblencvKkNK5lMaHYQ2RbnYob4X6lraHQlECOSzcanozWMgWDSoHTIUzLqFse_zkSogjYU1eaF3-HxygJsSsK539wTh9s3UTLcDV" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>JBL Tour One M2</h5>
+<p class="text-warning">★★★★☆</p>
+<h4 class="text-success">₹18,999</h4>
+<del>₹28,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('JBL Tour One M2', 18999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7-wMilkR-96GIqHMQgblencvKkNK5lMaHYQ2RbnYob4X6lraHQlECOSzcanozWMgWDSoHTIUzLqFse_zkSogjYU1eaF3-HxygJsSsK539wTh9s3UTLcDV')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('JBL Tour One M2', 18999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7-wMilkR-96GIqHMQgblencvKkNK5lMaHYQ2RbnYob4X6lraHQlECOSzcanozWMgWDSoHTIUzLqFse_zkSogjYU1eaF3-HxygJsSsK539wTh9s3UTLcDV')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">22% OFF</span>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnFg6L2HFoD1Fmw3Ne8f4EtNXeIyxkCi9ufx0ZtQG5LevCgVcv1CTFPE8S9_ltwPgfnKsYlCsGt6MWKrrKuSFB0GG9Hzv7aloWdROq-D0" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Sennheiser Momentum 4</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹26,999</h4>
+<del>₹34,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Sennheiser Momentum 4', 26999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnFg6L2HFoD1Fmw3Ne8f4EtNXeIyxkCi9ufx0ZtQG5LevCgVcv1CTFPE8S9_ltwPgfnKsYlCsGt6MWKrrKuSFB0GG9Hzv7aloWdROq-D0')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Sennheiser Momentum 4', 26999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnFg6L2HFoD1Fmw3Ne8f4EtNXeIyxkCi9ufx0ZtQG5LevCgVcv1CTFPE8S9_ltwPgfnKsYlCsGt6MWKrrKuSFB0GG9Hzv7aloWdROq-D0')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">28% OFF</span>
+<img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTCnxoe_fj42D_WNbipPBNZmbYYyvaOZmpDmncmuLGm18_uQiD2fnVYYDxpR8aUBvgf_2z_alDWuzzGDof3rv6HqW09i39y8RWPDor1UlBc5rQgNf3JnNqH" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Beats Studio Pro</h5>
+<p class="text-warning">★★★★☆</p>
+<h4 class="text-success">₹23,999</h4>
+<del>₹33,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Beats Studio Pro', 23999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTCnxoe_fj42D_WNbipPBNZmbYYyvaOZmpDmncmuLGm18_uQiD2fnVYYDxpR8aUBvgf_2z_alDWuzzGDof3rv6HqW09i39y8RWPDor1UlBc5rQgNf3JnNqH')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Beats Studio Pro', 23999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTCnxoe_fj42D_WNbipPBNZmbYYyvaOZmpDmncmuLGm18_uQiD2fnVYYDxpR8aUBvgf_2z_alDWuzzGDof3rv6HqW09i39y8RWPDor1UlBc5rQgNf3JnNqH')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">40% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR-p08tEr3O7nf1o1RXpypsyAhgMcZfww3yMKtrXf_PHfGDo4nQmrgsIuSoH6Y_FGmG_oyoCJDU0lz6Vnr3T6vDkvebcHMZ0YgfXVeRD7a4CLcuMZKyYSEDaw" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>boAt Nirvana 751 ANC</h5>
+<p class="text-warning">★★★★☆</p>
+<h4 class="text-success">₹3,999</h4>
+<del>₹6,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('boAt Nirvana 751 ANC', 3999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR-p08tEr3O7nf1o1RXpypsyAhgMcZfww3yMKtrXf_PHfGDo4nQmrgsIuSoH6Y_FGmG_oyoCJDU0lz6Vnr3T6vDkvebcHMZ0YgfXVeRD7a4CLcuMZKyYSEDaw')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('boAt Nirvana 751 ANC', 3999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR-p08tEr3O7nf1o1RXpypsyAhgMcZfww3yMKtrXf_PHfGDo4nQmrgsIuSoH6Y_FGmG_oyoCJDU0lz6Vnr3T6vDkvebcHMZ0YgfXVeRD7a4CLcuMZKyYSEDaw')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+
+<span class="badge bg-danger position-absolute m-2">38% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQc6YOwvcKTMoFKS90u0scC7SQXpOCYsunL_64kumqTAcs0M_2C3EInDAKGytTTOP2cKPk2qMBXaH-_VeQQV4FNoCwbOXQ9H6Fkgrx4UJxAqkCDuFEcluCl" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Skullcandy Crusher Evo</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹11,999</h4>
+<del>₹18,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Skullcandy Crusher Evo', 11999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQc6YOwvcKTMoFKS90u0scC7SQXpOCYsunL_64kumqTAcs0M_2C3EInDAKGytTTOP2cKPk2qMBXaH-_VeQQV4FNoCwbOXQ9H6Fkgrx4UJxAqkCDuFEcluCl')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Skullcandy Crusher Evo', 11999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQc6YOwvcKTMoFKS90u0scC7SQXpOCYsunL_64kumqTAcs0M_2C3EInDAKGytTTOP2cKPk2qMBXaH-_VeQQV4FNoCwbOXQ9H6Fkgrx4UJxAqkCDuFEcluCl')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">20% OFF</span>
+<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSL-sWNNUj2-FkBmHLFWqqtZHnYseZeAyaFiB4iffi6uZurXDIw8sTW4ia57igKLvAHPVqLHdo3_gjrLD2-w3Pu1MgFVeXgtmUOq5tnVJGAdvsSyBsGGvq5mA" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Soundcore Q45</h5>
+<p class="text-warning">★★★★☆</p>
+<h4 class="text-success">₹11,499</h4>
+<del>₹14,499</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Soundcore Q45', 11499, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSL-sWNNUj2-FkBmHLFWqqtZHnYseZeAyaFiB4iffi6uZurXDIw8sTW4ia57igKLvAHPVqLHdo3_gjrLD2-w3Pu1MgFVeXgtmUOq5tnVJGAdvsSyBsGGvq5mA')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Soundcore Q45', 11499, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSL-sWNNUj2-FkBmHLFWqqtZHnYseZeAyaFiB4iffi6uZurXDIw8sTW4ia57igKLvAHPVqLHdo3_gjrLD2-w3Pu1MgFVeXgtmUOq5tnVJGAdvsSyBsGGvq5mA')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">30% OFF</span>
+<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQmZfxt1sFhalzRT9Q-lfgvcZKzt_g6Wzs4QzLFbD1blliA3b7qRo2TbD3SEapTy97KrmUIJCNBMpq5rtLjTz_Tuv93Z5prfWWxXp4hrWkA7opXqsLgn6oL" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Logitech G733</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹10,999</h4>
+<del>₹15,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Logitech G733', 10999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQmZfxt1sFhalzRT9Q-lfgvcZKzt_g6Wzs4QzLFbD1blliA3b7qRo2TbD3SEapTy97KrmUIJCNBMpq5rtLjTz_Tuv93Z5prfWWxXp4hrWkA7opXqsLgn6oL')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Logitech G733', 10999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQmZfxt1sFhalzRT9Q-lfgvcZKzt_g6Wzs4QzLFbD1blliA3b7qRo2TbD3SEapTy97KrmUIJCNBMpq5rtLjTz_Tuv93Z5prfWWxXp4hrWkA7opXqsLgn6oL')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">18% OFF</span>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyg66Q9kWgAeoR26QBrVAKMbK9JiE8Pm2DeDZ0lKZuqX3Y-eAsRjVlQhxz89DhRADvUqIP8sgBHse3Eaavce8xSuWF030C_8rkIDphuiYcVaW_b51jy4Y-" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Razer BlackShark V2 Pro</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹15,999</h4>
+<del>₹19,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Razer BlackShark V2 Pro', 15999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyg66Q9kWgAeoR26QBrVAKMbK9JiE8Pm2DeDZ0lKZuqX3Y-eAsRjVlQhxz89DhRADvUqIP8sgBHse3Eaavce8xSuWF030C_8rkIDphuiYcVaW_b51jy4Y-')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Razer BlackShark V2 Pro', 15999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyg66Q9kWgAeoR26QBrVAKMbK9JiE8Pm2DeDZ0lKZuqX3Y-eAsRjVlQhxz89DhRADvUqIP8sgBHse3Eaavce8xSuWF030C_8rkIDphuiYcVaW_b51jy4Y-')">Buy Now</button>
+</div>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="card shadow border-0 rounded-4 h-100">
+<span class="badge bg-danger position-absolute m-2">27% OFF</span>
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmU1WEJuOHAv_jMRCLUImM1bHD6HeoAQ_-COYnvlQy6GGUMBqIJJ8M5RUfTAmaDhS49gBAcsFKGZ-9ofsEOCinlzhfxHMGJLopqGEKMTTfrsflo1nxKvq_7A" class="card-img-top p-3" height="220">
+<div class="card-body text-center">
+<h5>Sony INZONE H9</h5>
+<p class="text-warning">★★★★★</p>
+<h4 class="text-success">₹17,999</h4>
+<del>₹24,999</del><br><br>
+<button class="btn btn-warning w-100 mb-2" onclick="addToCart('Sony INZONE H9', 17999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmU1WEJuOHAv_jMRCLUImM1bHD6HeoAQ_-COYnvlQy6GGUMBqIJJ8M5RUfTAmaDhS49gBAcsFKGZ-9ofsEOCinlzhfxHMGJLopqGEKMTTfrsflo1nxKvq_7A')">Add to Cart</button>
+<button class="btn btn-success w-100" onclick="buyNow('Sony INZONE H9', 17999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmU1WEJuOHAv_jMRCLUImM1bHD6HeoAQ_-COYnvlQy6GGUMBqIJJ8M5RUfTAmaDhS49gBAcsFKGZ-9ofsEOCinlzhfxHMGJLopqGEKMTTfrsflo1nxKvq_7A')">Buy Now</button>
+</div>
+</div>
+</div>
+<div class="row g-4">
+
+    <!-- Product 1 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">20% OFF</span>
+            <img src="https://m.media-amazon.com/images/I/71fwbMm1NBL._SL1500_.jpg" class="card-img-top p-3" height="220" style="object-fit:contain;">
+            <div class="card-body text-center">
+                <h5>Apple Watch Series 10</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹44,999</h4>
+                <del class="text-muted">₹55,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Apple Watch Series 10', 44999, 'https://m.media-amazon.com/images/I/71fwbMm1NBL._SL1500_.jpg')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Apple Watch Series 10', 44999, 'https://m.media-amazon.com/images/I/71fwbMm1NBL._SL1500_.jpg')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">25% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTTkwndwIrnCSHqBMFtyHTnr_mUBtF2q6VEASoEM5alGb2ChyXs6aoZk0PXWvWDCU-FzdNZRzc9ad5KcUr-7ly-jkCUlxa7_yyOlE91vZe4w7ugAu-oKBP2rw" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Samsung Galaxy Watch Ultra</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹49,999</h4>
+                <del>₹66,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Samsung Galaxy Watch Ultra', 49999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTTkwndwIrnCSHqBMFtyHTnr_mUBtF2q6VEASoEM5alGb2ChyXs6aoZk0PXWvWDCU-FzdNZRzc9ad5KcUr-7ly-jkCUlxa7_yyOlE91vZe4w7ugAu-oKBP2rw')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Samsung Galaxy Watch Ultra', 49999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTTkwndwIrnCSHqBMFtyHTnr_mUBtF2q6VEASoEM5alGb2ChyXs6aoZk0PXWvWDCU-FzdNZRzc9ad5KcUr-7ly-jkCUlxa7_yyOlE91vZe4w7ugAu-oKBP2rw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">30% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROGEaSZlLuNy0vvbhZ2ixVIv0oN5vu0F7A463s2Sc5n2e6T6OOU49sQw7CEASqsno4kEszz5GGSI9dOqEbdthyvFwRtQFMAV92MauHay_SN_iGAh-q6ovp" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Garmin Venu 3</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹39,999</h4>
+                <del>₹56,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Garmin Venu 3', 39999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROGEaSZlLuNy0vvbhZ2ixVIv0oN5vu0F7A463s2Sc5n2e6T6OOU49sQw7CEASqsno4kEszz5GGSI9dOqEbdthyvFwRtQFMAV92MauHay_SN_iGAh-q6ovp')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Garmin Venu 3', 39999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROGEaSZlLuNy0vvbhZ2ixVIv0oN5vu0F7A463s2Sc5n2e6T6OOU49sQw7CEASqsno4kEszz5GGSI9dOqEbdthyvFwRtQFMAV92MauHay_SN_iGAh-q6ovp')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">35% OFF</span>
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTmu_obTsmtopZad0tjPKBmpHl4ESryRk3D4sLkQPhQls9Jh7Zp0dw1Myts_CqkjAWo_sqzkw-0McIbkf_fxdjnr1ojshKc3SXpVJXPLfeN0Ps4t4MrmyOY" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Amazfit Balance</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹18,999</h4>
+                <del>₹28,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Amazfit Balance', 18999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTmu_obTsmtopZad0tjPKBmpHl4ESryRk3D4sLkQPhQls9Jh7Zp0dw1Myts_CqkjAWo_sqzkw-0McIbkf_fxdjnr1ojshKc3SXpVJXPLfeN0Ps4t4MrmyOY')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Amazfit Balance', 18999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTmu_obTsmtopZad0tjPKBmpHl4ESryRk3D4sLkQPhQls9Jh7Zp0dw1Myts_CqkjAWo_sqzkw-0McIbkf_fxdjnr1ojshKc3SXpVJXPLfeN0Ps4t4MrmyOY')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">22% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSgUyjF7SRzXqO7zedw1t-U_FvgjlECUQH4YXdf2eNX3l-6fEH_gtebYTHIHn1PPcVZD_-Smfpc7o2NzSXpY2knUMAwH2Q6BeII1i_KjRF0UbL2P2chKBsaA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>OnePlus Watch 2</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹22,999</h4>
+                <del>₹29,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('OnePlus Watch 2', 22999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSgUyjF7SRzXqO7zedw1t-U_FvgjlECUQH4YXdf2eNX3l-6fEH_gtebYTHIHn1PPcVZD_-Smfpc7o2NzSXpY2knUMAwH2Q6BeII1i_KjRF0UbL2P2chKBsaA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('OnePlus Watch 2', 22999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSgUyjF7SRzXqO7zedw1t-U_FvgjlECUQH4YXdf2eNX3l-6fEH_gtebYTHIHn1PPcVZD_-Smfpc7o2NzSXpY2knUMAwH2Q6BeII1i_KjRF0UbL2P2chKBsaA')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">40% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Noise ColorFit Pro 6</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹4,499</h4>
+                <del>₹7,499</del><br><br>
+                <button class="btn btn-warning w-100 mb-2 "onclick="addToCart('Noise ColorFit Pro 6', 4499, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Noise ColorFit Pro 6', 4499, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 7 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">38% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>boAt Lunar Pro LTE</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹5,999</h4>
+                <del>₹9,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('boAt Lunar Pro LTE', 5999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('boAt Lunar Pro LTE', 5999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 8 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">25% OFF</span>
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Fire-Boltt Dream</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹8,999</h4>
+                <del>₹11,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Fire-Boltt Dream', 8999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Fire-Boltt Dream', 8999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 9 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">30% OFF</span>
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ5Jg0fZJQxuIPg7IO20BCkqqUEcErbVeeLPHFccSkgPLWQaLgAc4W_OamhiWoo9vdWBy0iL2AF9SCOB9H_pwjsVPYkezcVCHzKQ_kXxFVmRAwm_FerX7MbtB4" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Fitbit Versa 4</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹17,999</h4>
+                <del>₹25,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Fitbit Versa 4', 17999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ5Jg0fZJQxuIPg7IO20BCkqqUEcErbVeeLPHFccSkgPLWQaLgAc4W_OamhiWoo9vdWBy0iL2AF9SCOB9H_pwjsVPYkezcVCHzKQ_kXxFVmRAwm_FerX7MbtB4')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Fitbit Versa 4', 17999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ5Jg0fZJQxuIPg7IO20BCkqqUEcErbVeeLPHFccSkgPLWQaLgAc4W_OamhiWoo9vdWBy0iL2AF9SCOB9H_pwjsVPYkezcVCHzKQ_kXxFVmRAwm_FerX7MbtB4')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 10 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">28% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Huawei Watch GT 5</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹21,999</h4>
+                <del>₹30,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Huawei Watch GT 5', 21999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Huawei Watch GT 5', 21999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 11 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">35% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>CMF Watch Pro 2</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹4,999</h4>
+                <del>₹7,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('CMF Watch Pro 2', 4999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('CMF Watch Pro 2', 4999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 12 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">32% OFF</span>
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Xiaomi Watch S4</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹14,999</h4>
+                <del>₹21,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Xiaomi Watch S4', 14999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Xiaomi Watch S4', 14999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+function addToCart(name, price, image){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let index = cart.findIndex(item => item.name === name);
+
+    if(index > -1){
+        cart[index].quantity++;
+    }else{
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " Added to Cart");
+
+    window.location.href = "{% url 'cart' %}";
+}
+function buyNow(name, price, image){
+
+    const product = {
+        name: name,
+        price: price,
+        image: image,
+        quantity: 1
+    };
+
+    localStorage.setItem("buyNowProduct", JSON.stringify(product));
+    localStorage.setItem("checkoutMode", "buy-now");
+    window.location.href = "{% url 'checkout' %}";
+
+}
+</script>
+</body>
+</html>

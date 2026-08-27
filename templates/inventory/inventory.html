@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory Management - SMARTSY Electronics</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+body{background:#f4f6f9}
+.sidebar{min-height:100vh;background:#111827;color:#fff}
+.sidebar a{color:#d1d5db;text-decoration:none;display:block;padding:12px 18px;border-radius:10px;margin:4px 0}
+.sidebar a:hover,.sidebar a.active{background:#2563eb;color:#fff}
+.product-img{width:58px;height:58px;object-fit:contain;border-radius:10px;background:#f8f9fa}
+.stat{border:0;border-radius:16px}
+.table-card{border:0;border-radius:16px;overflow:hidden}
+.stock-low{color:#dc3545;font-weight:700}
+.stock-ok{color:#198754;font-weight:700}
+.search{max-width:350px}
+@media(max-width:767px){
+ .sidebar{min-height:auto}
+ .table-responsive{font-size:13px}
+ .product-img{width:45px;height:45px}
+}
+</style>
+</head>
+<body>
+
+<div class="container-fluid">
+<div class="row">
+
+<!-- SIDEBAR -->
+<div class="col-lg-2 col-md-3 sidebar p-3">
+    <h4 class="fw-bold mb-4">SMARTSY Admin</h4>
+
+    <a href="{% url 'home' %}"><i class="bi bi-house me-2"></i> Home</a>
+    <a href="{% url 'inventory' %}" class="active"><i class="bi bi-box-seam me-2"></i> Inventory</a>
+    <a href="{% url 'add_product' %}"><i class="bi bi-plus-circle me-2"></i> Add Product</a>
+    <div class="text-uppercase text-secondary small fw-bold mt-3 mb-1 px-2">Category inventory</div>
+    <a href="{% url 'inventory_category' 'mobile' %}"><i class="bi bi-phone me-2"></i> Mobiles</a>
+    <a href="{% url 'inventory_category' 'laptop' %}"><i class="bi bi-laptop me-2"></i> Laptops</a>
+    <a href="{% url 'inventory_category' 'headphones' %}"><i class="bi bi-headphones me-2"></i> Headphones</a>
+    <a href="{% url 'inventory_category' 'smart-watch' %}"><i class="bi bi-smartwatch me-2"></i> Smart Watches</a>
+    {% if request.user.is_staff %}
+    <a href="{% url 'customer_master' %}"><i class="bi bi-graph-up-arrow me-2"></i> Sales Summary</a>
+    <a href="{% url 'add_sale' %}"><i class="bi bi-receipt me-2"></i> Invoice Entry</a>
+    {% endif %}
+    <a href="{% url 'cart' %}"><i class="bi bi-cart me-2"></i> Cart</a>
+    <a href="{% url 'contact' %}"><i class="bi bi-envelope me-2"></i> Contact</a>
+    <form method="post" action="{% url 'logout' %}" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-light w-100"><i class="bi bi-box-arrow-right me-2"></i>Log out</button>
+    </form>
+</div>
+
+<!-- MAIN -->
+<div class="col-lg-10 col-md-9 p-4">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <div>
+        <h2 class="fw-bold mb-1">{% if category_label %}{{ category_label }} Inventory{% else %}Inventory Management{% endif %}</h2>
+        <p class="text-muted mb-0">{% if category_label %}Manage all {{ category_label|lower }} products{% else %}Add, update, search and remove products{% endif %}</p>
+    </div>
+
+    <a href="{% url 'add_product' %}{% if category_label %}?category={{ category_label|urlencode }}{% endif %}" class="btn btn-primary btn-lg">
+        <i class="bi bi-plus-lg"></i> Add Product
+    </a>
+</div>
+
+<!-- STATS -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="card stat shadow-sm p-3">
+            <small class="text-muted">Total Products</small>
+            <h3 id="totalProducts" class="fw-bold mb-0">{{ products|length }}</h3>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card stat shadow-sm p-3">
+            <small class="text-muted">Total Stock</small>
+            <h3 id="totalStock" class="fw-bold mb-0">0</h3>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card stat shadow-sm p-3">
+            <small class="text-muted">Low Stock</small>
+            <h3 id="lowStock" class="fw-bold text-danger mb-0">0</h3>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="card stat shadow-sm p-3">
+            <small class="text-muted">Out of Stock</small>
+            <h3 id="outStock" class="fw-bold text-secondary mb-0">0</h3>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCT TABLE -->
+<div class="card table-card shadow-sm">
+<div class="card-body">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h5 class="fw-bold mb-0">{% if category_label %}{{ category_label }} Products{% else %}All Products{% endif %}</h5>
+
+        <div class="d-flex gap-2">
+            <select id="stockFilter" class="form-select">
+                <option value="all">All Stock</option>
+                <option value="in">In Stock</option>
+                <option value="low">Low Stock</option>
+                <option value="out">Out of Stock</option>
+            </select>
+
+            <input id="searchBox" type="search"
+                   class="form-control search"
+                   placeholder="Search product...">
+        </div>
+    </div>
+
+    <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-dark">
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Offer Price</th>
+                <th>Stock</th>
+                <th>Rating</th>
+                <th class="text-center">Add / Edit / Delete</th>
+            </tr>
+        </thead>
+
+        <tbody id="productTable">
+        {% for product in products %}
+            <tr data-name="{{ product.name|lower }} {{ product.category|lower }} {{ product.brand|lower }}"
+                data-stock="{{ product.stock|default:0 }}">
+                <td>
+                    <div class="d-flex align-items-center gap-2">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="product-img">
+                        {% else %}
+                            <div class="product-img d-flex align-items-center justify-content-center">
+                                <i class="bi bi-image text-muted"></i>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <div class="fw-bold">{{ product.name }}</div>
+                            <small class="text-muted">ID: {{ product.id }}</small>
+                        </div>
+                    </div>
+                </td>
+
+                <td>{{ product.category }}</td>
+                <td>{{ product.brand }}</td>
+                <td>₹{{ product.price }}</td>
+                <td class="text-success fw-bold">₹{{ product.offer_price }}</td>
+
+                <td>
+                    {% if product.stock|default:0 == 0 %}
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    {% elif product.stock|default:0 <= 5 %}
+                        <span class="badge bg-danger">Low: {{ product.stock }}</span>
+                    {% else %}
+                        <span class="badge bg-success">{{ product.stock }}</span>
+                    {% endif %}
+                </td>
+
+                <td>⭐ {{ product.rating }}</td>
+
+                <td>
+                    <div class="d-flex justify-content-center gap-1">
+                        <a href="{% url 'edit_product' product.id %}"
+                           class="btn btn-sm btn-outline-primary"
+                           title="Edit {{ product.name }}">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+
+                        <form method="post" action="{% url 'delete_product' product.id %}" class="d-inline"
+                              onsubmit="return confirm('Remove {{ product.name|escapejs }} from inventory?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Remove" aria-label="Remove {{ product.name }}">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% empty %}
+            <tr id="emptyRow">
+                <td colspan="8" class="text-center py-5">
+                    <i class="bi bi-box-seam fs-1 text-muted"></i>
+                    <h5 class="mt-2">No products found</h5>
+                    <p class="text-muted">Add your first product to inventory.</p>
+                    <a href="{% url 'add_product' %}" class="btn btn-primary">
+                        + Add Product
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function updateStats(){
+    const rows = [...document.querySelectorAll("#productTable tr[data-stock]")];
+
+    let totalStock = 0, low = 0, out = 0;
+
+    rows.forEach(row => {
+        const stock = Number(row.dataset.stock) || 0;
+        totalStock += stock;
+        if(stock === 0) out++;
+        else if(stock <= 5) low++;
+    });
+
+    document.getElementById("totalProducts").textContent = rows.length;
+    document.getElementById("totalStock").textContent = totalStock;
+    document.getElementById("lowStock").textContent = low;
+    document.getElementById("outStock").textContent = out;
+}
+
+function filterProducts(){
+    const search = document.getElementById("searchBox").value.toLowerCase();
+    const filter = document.getElementById("stockFilter").value;
+
+    document.querySelectorAll("#productTable tr[data-stock]").forEach(row => {
+        const name = row.dataset.name || "";
+        const stock = Number(row.dataset.stock) || 0;
+
+        let stockMatch = true;
+
+        if(filter === "in") stockMatch = stock > 5;
+        if(filter === "low") stockMatch = stock > 0 && stock <= 5;
+        if(filter === "out") stockMatch = stock === 0;
+
+        const searchMatch = name.includes(search);
+
+        row.style.display = searchMatch && stockMatch ? "" : "none";
+    });
+}
+
+document.getElementById("searchBox").addEventListener("input", filterProducts);
+document.getElementById("stockFilter").addEventListener("change", filterProducts);
+
+updateStats();
+</script>
+
+</body>
+</html>

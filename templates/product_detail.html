@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} | SMARTSY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main-image { width: 100%; height: 380px; object-fit: contain; background: #fff; }
+        .view-thumb { width: 90px; height: 90px; object-fit: contain; border: 2px solid transparent; cursor: pointer; }
+        .view-thumb:hover { border-color: #0d6efd; }
+        .spec-row { border-bottom: 1px solid #eee; padding: .65rem 0; }
+    </style>
+</head>
+<body class="bg-light"><main class="container py-5">
+    <a href="{% url 'index' %}" class="btn btn-outline-dark mb-4">&larr; Back to products</a>
+    <div class="card shadow-sm border-0"><div class="card-body p-4 p-md-5"><div class="row g-5">
+        <section class="col-md-6"><img id="mainImage" class="main-image rounded" src="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x600?text=No+Image{% endif %}" alt="{{ product.name }}">
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                {% if product.image %}<button class="btn btn-light p-1 text-center" type="button" onclick="setImage('{{ product.image.url }}')"><img class="view-thumb" src="{{ product.image.url }}" alt="Main view"><small class="d-block">Main</small></button>{% endif %}
+                {% for product_image in product.detail_images.all %}<button class="btn btn-light p-1 text-center" type="button" onclick="setImage('{{ product_image.image.url }}')"><img class="view-thumb" src="{{ product_image.image.url }}" alt="{{ product_image.get_view_name_display }}"><small class="d-block">{{ product_image.get_view_name_display }}</small></button>{% endfor %}
+            </div>
+        </section>
+        <section class="col-md-6"><p class="text-primary fw-semibold mb-1">{{ product.category }}</p><h1 class="h2">{{ product.name }}</h1>{% if product.brand %}<p class="text-muted">Brand: {{ product.brand }}</p>{% endif %}
+            <h3 class="text-success mt-4">₹{{ product.offer_price|default:product.price }}</h3>{% if product.offer_price %}<del class="text-muted">₹{{ product.price }}</del>{% endif %}
+            <p class="mt-4">{{ product.description|default:"Product details will be updated soon." }}</p>
+            <h4 class="mt-4">Specifications</h4><div class="mb-4">{% if product.specifications %}<div class="spec-row">{{ product.specifications|linebreaksbr }}</div>{% else %}<div class="spec-row">Category: {{ product.category }}</div><div class="spec-row">Brand: {{ product.brand|default:"SMARTSY" }}</div>{% endif %}</div>
+            <div class="d-flex gap-2"><button class="btn btn-warning" onclick="addToCart()">Add to Cart</button><button class="btn btn-success" onclick="buyNow()">Buy Now</button></div>
+        </section>
+    </div></div></div>
+</main><script>
+const product = { product_id: {{ product.id }}, name: "{{ product.name|escapejs }}", price: {{ product.offer_price|default:product.price }}, image: "{% if product.image %}{{ product.image.url }}{% endif %}", quantity: 1 };
+function setImage(url) { document.getElementById('mainImage').src = url; }
+function addToCart() { const cart = JSON.parse(localStorage.getItem('cart') || '[]'); const found = cart.find(item => item.product_id === product.product_id); if (found) found.quantity++; else cart.push(product); localStorage.setItem('cart', JSON.stringify(cart)); window.location.href = "{% url 'cart' %}"; }
+function buyNow() { localStorage.setItem('buyNowProduct', JSON.stringify(product)); localStorage.setItem('checkoutMode', 'buy-now'); window.location.href = "{% url 'checkout' %}"; }
+</script></body></html>

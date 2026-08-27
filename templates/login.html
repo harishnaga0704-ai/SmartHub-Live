@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in · SMARTSY</title>
+    <style>
+        *{box-sizing:border-box} body{min-height:100vh;margin:0;overflow:hidden;display:grid;place-items:center;font-family:Inter,system-ui,sans-serif;color:#f8fbff;background:radial-gradient(circle at 20% 20%,#2857bd 0,transparent 32%),radial-gradient(circle at 82% 76%,#7029ad 0,transparent 30%),#070b1b}.scene{width:min(92vw,430px);perspective:1200px}.orb{position:fixed;border-radius:50%;filter:blur(2px);opacity:.5;animation:drift 9s ease-in-out infinite alternate}.one{width:180px;height:180px;background:#33c7ff;top:8%;left:10%}.two{width:230px;height:230px;background:#a44bff;bottom:-5%;right:7%;animation-delay:-4s}.card{position:relative;padding:2.5rem;border-radius:25px;background:linear-gradient(140deg,#fff3,#fff1);border:1px solid #fff4;box-shadow:0 28px 65px #0007;backdrop-filter:blur(17px);transform-style:preserve-3d;animation:float 5.5s ease-in-out infinite}.brand,h1,.hint{transform:translateZ(35px)}.brand{letter-spacing:.16em;font-size:.74rem;color:#92dbff;font-weight:800}h1{margin:.55rem 0 .35rem;font-size:2.35rem}.hint{margin:0 0 1.8rem;color:#c2cce3;font-size:.95rem}.field{margin:1rem 0;transform:translateZ(25px)}label{display:block;margin-bottom:.45rem;color:#dbe8fb;font-size:.86rem;font-weight:700}input{width:100%;padding:.9rem 1rem;color:#fff;font:inherit;border-radius:12px;border:1px solid #fff4;background:#03081961;outline:0}input:focus{border-color:#78dcff;box-shadow:0 0 0 4px #4fcaFF29}button{width:100%;margin-top:.8rem;padding:.95rem;cursor:pointer;border:0;border-radius:12px;color:#071226;font:800 1rem inherit;background:linear-gradient(110deg,#74e6ff,#ae8aff);box-shadow:0 12px 25px #69b2ff42;transform:translateZ(40px)}.error{margin-bottom:1rem;padding:.75rem;border-radius:10px;background:#ff5b7729;border:1px solid #ff8b9d61;color:#ffe0e5;font-size:.9rem}.footer{margin:1.25rem 0 0;text-align:center;color:#cad4eb;font-size:.88rem;transform:translateZ(20px)}a{color:#91e6ff}@keyframes float{0%,100%{transform:rotateX(3deg) rotateY(-4deg) translateY(0)}50%{transform:rotateX(-3deg) rotateY(5deg) translateY(-12px)}}@keyframes drift{to{transform:translate(55px,35px) scale(1.18)}}@media(prefers-reduced-motion:reduce){.card,.orb{animation:none}}
+    </style>
+</head>
+<body>
+    <div class="orb one"></div><div class="orb two"></div>
+    <main class="scene"><section class="card" aria-labelledby="login-title">
+        <div class="brand">◈ SMART HUB</div><h1 id="login-title">Welcome back</h1><p class="hint">Sign in to manage your store and inventory.</p>
+        {% if form.errors %}<div class="error">Incorrect username or password. Please try again.</div>{% endif %}
+        <form method="post" action="{% url 'login' %}">{% csrf_token %}
+            <div class="field"><label for="id_username">Username</label><input id="id_username" name="username" autocomplete="username" required autofocus></div>
+            <div class="field"><label for="id_password">Password</label><input id="id_password" name="password" type="password" autocomplete="current-password" required></div>
+            <input type="hidden" name="next" value="{{ next }}"><button type="submit">Enter SMARTSY →</button>
+        </form><p class="footer">New here? <a href="{% url 'signup' %}">Create an account</a></p>
+    </section></main>
+</body></html>

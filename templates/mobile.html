@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Products</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f5f5f5;
+font-family:Arial, sans-serif;
+}
+
+.container{
+margin-top:40px;
+}
+
+.product-card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+transition:.3s;
+position:relative;
+}
+
+.product-card:hover{
+transform:translateY(-8px);
+}
+
+.product-card img{
+height:220px;
+width:100%;
+object-fit:contain;
+padding:15px;
+background:white;
+}
+
+@media (max-width:576px){
+.product-card img{
+height:170px;
+}
+}
+
+.discount{
+position:absolute;
+top:10px;
+left:10px;
+background:red;
+color:#fff;
+padding:5px 10px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
+}
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#28a745;
+}
+
+.old-price{
+text-decoration:line-through;
+color:gray;
+}
+
+.rating{
+color:orange;
+font-size:18px;
+}
+
+.btn-cart{
+background:#ff9800;
+color:white;
+}
+
+.btn-buy{
+background:#28a745;
+color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container pb-5">
+<a href="{% url 'index' %}" class="btn btn-dark mb-4">← Back to Home</a>
+
+<div class="row g-4" id="productRow"></div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   MOBILE PRODUCTS DATA
+   To add a NEW product later, just add one more object below.
+   image can be ANY online image URL (no upload needed).
+   discount / rating are optional - leave "" if not needed.
+========================================================= */
+const products = [
+  { name:"iPhone 16", price:74999, oldPrice:99999, discount:"25% OFF", rating:5,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16.jpg" },
+
+  { name:"Samsung S25 Ultra", price:109999, oldPrice:129999, discount:"20% OFF", rating:5,
+    image:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT4n8fx9KaxMm7hFItnbDQQu5zQ5UcKYigMyqKEm2qvWMOl60isKMifwgaTRWGTTwgAt42Hn9Lkox3UOeB1XsaRScEbf5OGazN0aZbOwM6-x-janWW676XbkQ" },
+
+  { name:"Google Pixel 9 Pro", price:84999, oldPrice:99999, discount:"18% OFF", rating:4,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSvksXl_a4GczTR_wr-g0pvC2Tt56p69a2Odp0G-vPYwEpz2YSdzT_lf-ITUUZc505TNJmGCQXy2bcAm40Sys3dVPQXdQgLUElvEqschZ7F0M-rJsAIXBeI" },
+
+  { name:"OnePlus 13", price:59999, oldPrice:84999, discount:"30% OFF", rating:5,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/oneplus-13.jpg" },
+
+  { name:"Xiaomi 15", price:54999, oldPrice:64999, discount:"15% OFF", rating:4,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/xiaomi-15.jpg" },
+
+  { name:"Vivo X200 Pro", price:79999, oldPrice:99999, discount:"22% OFF", rating:5,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/vivo-x200-pro.jpg" },
+
+  { name:"Oppo Find X8 Pro", price:74999, oldPrice:94999, discount:"28% OFF", rating:5,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/oppo-find-x8-pro.jpg" },
+
+  { name:"Realme GT 7 Pro", price:44999, oldPrice:55999, discount:"20% OFF", rating:4,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/realme-gt7-pro.jpg" },
+
+  { name:"Nothing Phone 3", price:49999, oldPrice:69999, discount:"35% OFF", rating:5,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/nothing-phone3.jpg" },
+
+  { name:"Motorola Edge 60 Pro", price:39999, oldPrice:54999, discount:"25% OFF", rating:4,
+    image:"https://fdn2.gsmarena.com/vv/bigpic/motorola-edge-60-pro.jpg" },
+
+  { name:"iQOO 13", price:54999, oldPrice:66999, discount:"18% OFF", rating:5,
+    image:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSfNX0G6hS3HUma4WvJveIEdkG3cbJWuaT0Re91Hx7-nhAyhmIUx8c_c95F9g_ZeidlDEqXsy0nFiTj5I4brxtr41KizAsxiyB-WxcbN0dyY8fahQFlqhea" },
+
+  { name:"Redmi Note 14 Pro+", price:29999, oldPrice:49999, discount:"40% OFF", rating:4,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR2gWKMywT86U6oycr68PgVnMMsWJ-SOFciz47M9VZvLKDiL82jiCsbtU-IKXNoV_9ReTAZUz8uFL6eF9QO6kXhCAY2XeAocdl3r9i-e6JnEVU6NCgwClx6bg" }
+];
+
+{% for product in db_products %}
+products.push({
+  name: "{{ product.name|escapejs }}",
+  price: {% if product.offer_price %}{{ product.offer_price|stringformat:".2f" }}{% else %}{{ product.price|stringformat:".2f" }}{% endif %},
+  oldPrice: {% if product.offer_price and product.price != product.offer_price %}{{ product.price|stringformat:".2f" }}{% else %}null{% endif %},
+  discount: "{% if product.discount_percent %}{{ product.discount_percent }}% OFF{% endif %}",
+  rating: {{ product.rating|default:5|floatformat:"0" }},
+  stock: {{ product.stock|default:0 }},
+  image: "{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/300x300?text=No+Image{% endif %}"
+});
+{% endfor %}
+
+
+function stars(n){
+  return "★".repeat(n) + "☆".repeat(5-n);
+}
+
+function renderProducts(){
+  const row = document.getElementById("productRow");
+  let html = "";
+
+  products.forEach(p => {
+    html += `
+    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+      <div class="product-card">
+        ${p.discount ? `<div class="discount">${p.discount}</div>` : ""}
+        <img src="${p.image}" alt="${p.name}">
+        <div class="p-3">
+          <h5>${p.name}</h5>
+          ${p.rating ? `<div class="rating">${stars(p.rating)}</div>` : ""}
+          <div class="small mb-2 ${Number(p.stock ?? 10) > 5 ? "text-success" : Number(p.stock ?? 10) > 0 ? "text-warning" : "text-danger"}">${Number(p.stock ?? 10) > 5 ? `In Stock: ${p.stock ?? 10}` : Number(p.stock ?? 10) > 0 ? `Low Stock: ${p.stock}` : "Out of Stock"}</div>
+          <p>
+            <span class="price">₹${p.price.toLocaleString("en-IN")}</span><br>
+            ${p.oldPrice ? `<span class="old-price">₹${p.oldPrice.toLocaleString("en-IN")}</span>` : ""}
+          </p>
+          <button class="btn btn-cart w-100 mb-2" ${Number(p.stock ?? 10) === 0 ? "disabled" : ""}
+            onclick="addToCart('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.image}')">
+            Add to Cart
+          </button>
+          <button class="btn btn-buy w-100"
+            onclick="buyNow('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.image}')">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  row.innerHTML = html;
+}
+
+renderProducts();
+
+function addToCart(name, price, image){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let index = cart.findIndex(item => item.name === name);
+
+    if(index > -1){
+        cart[index].quantity++;
+    }else{
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " Added to Cart");
+
+    window.location.href = "{% url 'cart' %}";
+}
+function buyNow(name, price, image){
+
+    const product = {
+        name: name,
+        price: price,
+        image: image,
+        quantity: 1
+    };
+
+    localStorage.setItem("buyNowProduct", JSON.stringify(product));
+    localStorage.setItem("checkoutMode", "buy-now");
+    window.location.href = "{% url 'checkout' %}";
+}
+</script>
+
+</body>
+</html>

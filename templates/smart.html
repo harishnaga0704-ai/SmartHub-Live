@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- ================= SMART WATCH PRODUCT CARDS ================= -->
+
+<div class="container py-4">
+<a href="{% url 'index' %}" class="btn btn-dark mb-4">← Back to Home</a>
+<div class="row g-4">
+
+    <!-- Product 1 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">20% OFF</span>
+            <img src="https://m.media-amazon.com/images/I/71fwbMm1NBL._SL1500_.jpg" class="card-img-top p-3" height="220" style="object-fit:contain;">
+            <div class="card-body text-center">
+                <h5>Apple Watch Series 10</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹44,999</h4>
+                <del class="text-muted">₹55,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Apple Watch Series 10', 44999, 'https://m.media-amazon.com/images/I/71fwbMm1NBL._SL1500_.jpg')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Apple Watch Series 10', 44999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">25% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTTkwndwIrnCSHqBMFtyHTnr_mUBtF2q6VEASoEM5alGb2ChyXs6aoZk0PXWvWDCU-FzdNZRzc9ad5KcUr-7ly-jkCUlxa7_yyOlE91vZe4w7ugAu-oKBP2rw" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Samsung Galaxy Watch Ultra</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹49,999</h4>
+                <del>₹66,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Samsung Galaxy Watch Ultra', 49999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTTkwndwIrnCSHqBMFtyHTnr_mUBtF2q6VEASoEM5alGb2ChyXs6aoZk0PXWvWDCU-FzdNZRzc9ad5KcUr-7ly-jkCUlxa7_yyOlE91vZe4w7ugAu-oKBP2rw')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Samsung Galaxy Watch Ultra', 49999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">30% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROGEaSZlLuNy0vvbhZ2ixVIv0oN5vu0F7A463s2Sc5n2e6T6OOU49sQw7CEASqsno4kEszz5GGSI9dOqEbdthyvFwRtQFMAV92MauHay_SN_iGAh-q6ovp" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Garmin Venu 3</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹39,999</h4>
+                <del>₹56,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Garmin Venu 3', 39999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROGEaSZlLuNy0vvbhZ2ixVIv0oN5vu0F7A463s2Sc5n2e6T6OOU49sQw7CEASqsno4kEszz5GGSI9dOqEbdthyvFwRtQFMAV92MauHay_SN_iGAh-q6ovp')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Garmin Venu 3', 39999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">35% OFF</span>
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTmu_obTsmtopZad0tjPKBmpHl4ESryRk3D4sLkQPhQls9Jh7Zp0dw1Myts_CqkjAWo_sqzkw-0McIbkf_fxdjnr1ojshKc3SXpVJXPLfeN0Ps4t4MrmyOY" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Amazfit Balance</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹18,999</h4>
+                <del>₹28,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Amazfit Balance', 18999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTmu_obTsmtopZad0tjPKBmpHl4ESryRk3D4sLkQPhQls9Jh7Zp0dw1Myts_CqkjAWo_sqzkw-0McIbkf_fxdjnr1ojshKc3SXpVJXPLfeN0Ps4t4MrmyOY')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Amazfit Balance', 18999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">22% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSgUyjF7SRzXqO7zedw1t-U_FvgjlECUQH4YXdf2eNX3l-6fEH_gtebYTHIHn1PPcVZD_-Smfpc7o2NzSXpY2knUMAwH2Q6BeII1i_KjRF0UbL2P2chKBsaA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>OnePlus Watch 2</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹22,999</h4>
+                <del>₹29,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('OnePlus Watch 2', 22999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQSgUyjF7SRzXqO7zedw1t-U_FvgjlECUQH4YXdf2eNX3l-6fEH_gtebYTHIHn1PPcVZD_-Smfpc7o2NzSXpY2knUMAwH2Q6BeII1i_KjRF0UbL2P2chKBsaA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('OnePlus Watch 2', 22999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTxFQdDO3i21xogsBmHDvbBNiwic9wdT086-KXKUG70s3tdC9BweDdOAaXXGvk0qvyUdEQFkMxg0N-nnIxUa77D37yOQJ2_Aw')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">40% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Noise ColorFit Pro 6</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹4,499</h4>
+                <del>₹7,499</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Noise ColorFit Pro 6', 4499, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Noise ColorFit Pro 6', 4499, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTg2uUyLX5tEZownBqlh0M-zZORlMCweSMcrGluIfb8Kiu5L05n3pJIeXYyrT2v692Yi9b3vNrIsMrfMTKpgVxJo1vfop6DOeXIM1cIz3eSW9ncEgTar5p6')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 7 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">38% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>boAt Lunar Pro LTE</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹5,999</h4>
+                <del>₹9,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('boAt Lunar Pro LTE', 5999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('boAt Lunar Pro LTE', 5999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQE4elSy8fQkcEOFCHPUmo3EOsi8wprbqANhWvhgk0dxqfXXudDYNiA6aK_8-6mbCiVvGt-UNlfkEKyhlkCt-MIK9ag-5jb-W8N2OsSXuF__9TBNYgdxgb41A')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 8 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">25% OFF</span>
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Fire-Boltt Dream</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹8,999</h4>
+                <del>₹11,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Fire-Boltt Dream', 8999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Fire-Boltt Dream', 8999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRbeuwwiuC1VX4cOh2lsiSR154pEisl3jtJBWbTM2pt5LM1aEpl49exQDvRWMHoRGQ_Ha1NmzTKZb0_wVC9Nah-bUc2LzMhCNiNhr5OcZyZuoEx7KAD7edLUQ')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 9 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">30% OFF</span>
+            <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ5Jg0fZJQxuIPg7IO20BCkqqUEcErbVeeLPHFccSkgPLWQaLgAc4W_OamhiWoo9vdWBy0iL2AF9SCOB9H_pwjsVPYkezcVCHzKQ_kXxFVmRAwm_FerX7MbtB4" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Fitbit Versa 4</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹17,999</h4>
+                <del>₹25,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Fitbit Versa 4', 17999, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ5Jg0fZJQxuIPg7IO20BCkqqUEcErbVeeLPHFccSkgPLWQaLgAc4W_OamhiWoo9vdWBy0iL2AF9SCOB9H_pwjsVPYkezcVCHzKQ_kXxFVmRAwm_FerX7MbtB4')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Fitbit Versa 4', 17999)">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 10 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">28% OFF</span>
+            <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Huawei Watch GT 5</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹21,999</h4>
+                <del>₹30,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Huawei Watch GT 5', 21999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Huawei Watch GT 5', 21999, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbDde3LqlVxErljFfIuNRTLHR1G8yKs0yb9K85W8--80crO8ebgq77JuPFrykggEhz9tik6W2gIoXwiw58ZeXShXL73z9kZ7KRZFOP2PbURNBBG1TtDIPRhA')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 11 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">35% OFF</span>
+            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>CMF Watch Pro 2</h5>
+                <p class="text-warning">★★★★☆</p>
+                <h4 class="text-success">₹4,999</h4>
+                <del>₹7,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('CMF Watch Pro 2', 4999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('CMF Watch Pro 2', 4999, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQT_yxCcmeyg4D9tymzVnmvqzt4eA98IUhTcTdL3-HV2jWfqtAuzslqf5MJze6xRK9PPKKPaMCRlEFlP0dQ_coPD_eYiqDHlNW2fFiNReuKLIz-1CMpbfVtmQ')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product 12 -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4">
+            <span class="badge bg-danger position-absolute m-2">32% OFF</span>
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA" class="card-img-top p-3" height="220">
+            <div class="card-body text-center">
+                <h5>Xiaomi Watch S4</h5>
+                <p class="text-warning">★★★★★</p>
+                <h4 class="text-success">₹14,999</h4>
+                <del>₹21,999</del><br><br>
+                <button class="btn btn-warning w-100 mb-2" onclick="addToCart('Xiaomi Watch S4', 14999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('Xiaomi Watch S4', 14999, 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRD5xUniH4bJqTSza7lcnrztE5sDfyLuCzyF-CuIlYT1cRAYbvb2UwrHAPermTgzkXUBq4IpSkcWo9sbc4fyEg61IYk7YDWzzaipnE4dq9tJiGhwseCaZpoVA')">Buy Now</button>
+            </div>
+        </div>
+    <!-- Database Products -->
+    {% for product in db_products %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card h-100 shadow border-0 rounded-4" data-stock="{{ product.stock }}">
+            {% if product.discount_percent %}
+            <span class="badge bg-danger position-absolute m-2">{{ product.discount_percent }}% OFF</span>
+            {% endif %}
+            
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="card-img-top p-3" height="220" style="object-fit:contain;" alt="{{ product.name }}">
+            {% else %}
+            <div class="d-flex align-items-center justify-content-center p-3" style="height:220px; background:#f8f9fa;">
+                <span class="text-muted">No Image</span>
+            </div>
+            {% endif %}
+            
+            <div class="card-body text-center d-flex flex-column">
+                <h5>{{ product.name }}</h5>
+                <p class="text-warning">
+                    {% if product.rating %}
+                        {% if product.rating >= 4.5 %}★★★★★{% elif product.rating >= 3.5 %}★★★★☆{% elif product.rating >= 2.5 %}★★★☆☆{% elif product.rating >= 1.5 %}★★☆☆☆{% else %}★☆☆☆☆{% endif %}
+                    {% else %}
+                        ★★★★★
+                    {% endif %}
+                </p>
+                <h4 class="text-success mt-auto">₹{{ product.offer_price|default:product.price }}</h4>
+                {% if product.offer_price and product.price != product.offer_price %}
+                <del class="text-muted">₹{{ product.price }}</del>
+                {% endif %}
+                <br><br>
+                <button class="btn btn-warning w-100 mb-2 mt-auto" onclick="addToCart('{{ product.name|escapejs }}', {{ product.offer_price|default:product.price }}, '{% if product.image %}{{ product.image.url }}{% endif %}')">Add to Cart</button>
+                <button class="btn btn-success w-100" onclick="buyNow('{{ product.name|escapejs }}', {{ product.offer_price|default:product.price }}, '{% if product.image %}{{ product.image.url }}{% endif %}')">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+<script>
+function addToCart(name, price, image){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let index = cart.findIndex(item => item.name === name);
+
+    if(index > -1){
+        cart[index].quantity++;
+    }else{
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " Added to Cart");
+
+    window.location.href = "{% url 'cart' %}";
+}
+function buyNow(name, price, image){
+
+    const product = {
+        name: name,
+        price: price,
+        image: image,
+        quantity: 1
+    };
+
+    localStorage.setItem("buyNowProduct", JSON.stringify(product));
+    localStorage.setItem("checkoutMode", "buy-now");
+    window.location.href = "{% url 'checkout' %}";
+}
+
+// Static catalogue cards use the available catalogue status; products created
+// from Inventory carry their exact database stock in data-stock.
+document.querySelectorAll(".card").forEach(card => {
+    const rawStock = card.dataset.stock;
+    const stock = rawStock === undefined ? 10 : Number(rawStock);
+    const status = stock === 0 ? "Out of Stock" : stock <= 5 ? `Low Stock: ${stock}` : `In Stock: ${stock}`;
+    const color = stock === 0 ? "text-danger" : stock <= 5 ? "text-warning" : "text-success";
+    const rating = card.querySelector(".text-warning");
+    if (rating) rating.insertAdjacentHTML("afterend", `<p class="small fw-semibold ${color} mb-2">${status}</p>`);
+});
+</script>
+</body>
+</html>

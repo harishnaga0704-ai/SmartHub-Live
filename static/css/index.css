@@ -1,0 +1,117 @@
+/* DATABASE PRODUCTS - SAME SIZE AS HOME PRODUCT CARD */
+
+.db-product-card {
+    height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+
+    transition: .3s !important;
+}
+
+.db-product-card:hover {
+    transform: translateY(-10px);
+}
+
+
+/* SAME IMAGE SIZE AS HOME CARD */
+
+.db-product-card .db-product-image {
+    width: 100% !important;
+    height: 180px !important;
+    min-height: 180px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+}
+
+.db-product-card .db-product-image img {
+    width: 100% !important;
+    height: 180px !important;
+
+    object-fit: contain !important;
+    padding: 10px !important;
+}
+
+
+/* PRODUCT CONTENT */
+
+.db-product-card .db-product-content {
+    flex: 1 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    padding: 14px !important;
+    box-sizing: border-box !important;
+}
+
+
+/* PRODUCT NAME */
+
+.db-product-card .db-product-name {
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+
+    line-height: 21px !important;
+
+    overflow: hidden !important;
+
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+
+/* BRAND */
+
+.db-product-card .db-product-brand {
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+
+    overflow: hidden !important;
+}
+
+
+/* PRICE / RATING / BUTTON */
+
+.db-product-card .db-product-bottom {
+    margin-top: auto !important;
+}
+
+
+/* MOBILE - SAME AS HOME */
+
+@media (max-width: 768px) {
+
+    .db-product-card .db-product-image,
+    .db-product-card .db-product-image img {
+
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+    }
+
+    .db-product-card .db-product-content {
+        padding: 10px !important;
+    }
+
+    .db-product-card .db-product-name {
+        height: 42px !important;
+        min-height: 42px !important;
+        max-height: 42px !important;
+    }
+}

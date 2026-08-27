@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Headphones</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{ background:#f5f5f5; }
+.card-img-top{ height:220px; object-fit:contain; }
+@media (max-width:576px){
+    .card-img-top{ height:170px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container py-4">
+<a href="{% url 'index' %}" class="btn btn-dark mb-4">← Back to Home</a>
+<div class="row g-4" id="productRow"></div>
+</div>
+
+<script>
+
+/* =========================================================
+   HEADPHONE PRODUCTS DATA
+   To add a NEW product later, just add one more object below.
+   image can be ANY online image URL (no upload needed).
+   discount / rating are optional - leave "" if not needed.
+========================================================= */
+const products = [
+  { name:"Sony WH-1000XM5", price:24999, oldPrice:35999, discount:"30% OFF", rating:5,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS1PX7Ysujy-bJsKfFBR7RPAsw0USXELV3nmZZitIU2ABT7RgQINdC4dj8_BTyFun1zy8ChXxz8otlVgoNRoLmzsB7KvTu4" },
+
+  { name:"Apple AirPods Max", price:49999, oldPrice:66999, discount:"25% OFF", rating:5,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQQvof7FaZLP4RTFVQ1dND50QYqKWxE9Odl8OsXBKjeZcB9RHVO6IFCi7BYU28nZjsiUszvMTg4EcOqusMLMsFxi2pO9iOQ-95z816ljng0wJd_NbTHGhBH_ts" },
+
+  { name:"Bose QC Ultra", price:29999, oldPrice:37999, discount:"20% OFF", rating:5,
+    image:"https://i.ebayimg.com/images/g/jikAAeSwJj9o-MVI/s-l1600.jpg" },
+
+  { name:"JBL Tour One M2", price:18999, oldPrice:28999, discount:"35% OFF", rating:4,
+    image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ7-wMilkR-96GIqHMQgblencvKkNK5lMaHYQ2RbnYob4X6lraHQlECOSzcanozWMgWDSoHTIUzLqFse_zkSogjYU1eaF3-HxygJsSsK539wTh9s3UTLcDV" },
+
+  { name:"Sennheiser Momentum 4", price:26999, oldPrice:34999, discount:"22% OFF", rating:5,
+    image:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSnFg6L2HFoD1Fmw3Ne8f4EtNXeIyxkCi9ufx0ZtQG5LevCgVcv1CTFPE8S9_ltwPgfnKsYlCsGt6MWKrrKuSFB0GG9Hzv7aloWdROq-D0" },
+
+  { name:"Beats Studio Pro", price:23999, oldPrice:33999, discount:"28% OFF", rating:4,
+    image:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTCnxoe_fj42D_WNbipPBNZmbYYyvaOZmpDmncmuLGm18_uQiD2fnVYYDxpR8aUBvgf_2z_alDWuzzGDof3rv6HqW09i39y8RWPDor1UlBc5rQgNf3JnNqH" },
+
+  { name:"boAt Nirvana 751 ANC", price:3999, oldPrice:6999, discount:"40% OFF", rating:4,
+    image:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR-p08tEr3O7nf1o1RXpypsyAhgMcZfww3yMKtrXf_PHfGDo4nQmrgsIuSoH6Y_FGmG_oyoCJDU0lz6Vnr3T6vDkvebcHMZ0YgfXVeRD7a4CLcuMZKyYSEDaw" },
+
+  { name:"Skullcandy Crusher Evo", price:11999, oldPrice:18999, discount:"38% OFF", rating:5,
+    image:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQc6YOwvcKTMoFKS90u0scC7SQXpOCYsunL_64kumqTAcs0M_2C3EInDAKGytTTOP2cKPk2qMBXaH-_VeQQV4FNoCwbOXQ9H6Fkgrx4UJxAqkCDuFEcluCl" },
+
+  { name:"Soundcore Q45", price:11499, oldPrice:14499, discount:"20% OFF", rating:4,
+    image:"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSL-sWNNUj2-FkBmHLFWqqtZHnYseZeAyaFiB4iffi6uZurXDIw8sTW4ia57igKLvAHPVqLHdo3_gjrLD2-w3Pu1MgFVeXgtmUOq5tnVJGAdvsSyBsGGvq5mA" },
+
+  { name:"Logitech G733", price:10999, oldPrice:15999, discount:"30% OFF", rating:5,
+    image:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQmZfxt1sFhalzRT9Q-lfgvcZKzt_g6Wzs4QzLFbD1blliA3b7qRo2TbD3SEapTy97KrmUIJCNBMpq5rtLjTz_Tuv93Z5prfWWxXp4hrWkA7opXqsLgn6oL" },
+
+  { name:"Razer BlackShark V2 Pro", price:15999, oldPrice:19999, discount:"18% OFF", rating:5,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSyg66Q9kWgAeoR26QBrVAKMbK9JiE8Pm2DeDZ0lKZuqX3Y-eAsRjVlQhxz89DhRADvUqIP8sgBHse3Eaavce8xSuWF030C_8rkIDphuiYcVaW_b51jy4Y-" },
+
+  { name:"Sony INZONE H9", price:17999, oldPrice:24999, discount:"27% OFF", rating:5,
+    image:"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQmU1WEJuOHAv_jMRCLUImM1bHD6HeoAQ_-COYnvlQy6GGUMBqIJJ8M5RUfTAmaDhS49gBAcsFKGZ-9ofsEOCinlzhfxHMGJLopqGEKMTTfrsflo1nxKvq_7A" }
+];
+
+{% for product in db_products %}
+products.push({
+  name: "{{ product.name|escapejs }}",
+  price: {% if product.offer_price %}{{ product.offer_price|stringformat:".2f" }}{% else %}{{ product.price|stringformat:".2f" }}{% endif %},
+  oldPrice: {% if product.offer_price and product.price != product.offer_price %}{{ product.price|stringformat:".2f" }}{% else %}null{% endif %},
+  discount: "{% if product.discount_percent %}{{ product.discount_percent }}% OFF{% endif %}",
+  rating: {{ product.rating|default:5|floatformat:"0" }},
+  stock: {{ product.stock|default:0 }},
+  image: "{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/300x300?text=No+Image{% endif %}"
+});
+{% endfor %}
+
+
+function stars(n){
+  return "★".repeat(n) + "☆".repeat(5-n);
+}
+
+function renderProducts(){
+  const row = document.getElementById("productRow");
+  let html = "";
+
+  products.forEach(p => {
+    html += `
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="card shadow border-0 rounded-4 h-100">
+        ${p.discount ? `<span class="badge bg-danger position-absolute m-2">${p.discount}</span>` : ""}
+        <img src="${p.image}" class="card-img-top p-3" alt="${p.name}">
+        <div class="card-body text-center">
+          <h5>${p.name}</h5>
+          ${p.rating ? `<p class="text-warning">${stars(p.rating)}</p>` : ""}
+          <div class="small mb-2 ${Number(p.stock ?? 10) > 5 ? "text-success" : Number(p.stock ?? 10) > 0 ? "text-warning" : "text-danger"}">${Number(p.stock ?? 10) > 5 ? `In Stock: ${p.stock ?? 10}` : Number(p.stock ?? 10) > 0 ? `Low Stock: ${p.stock}` : "Out of Stock"}</div>
+          <h4 class="text-success">₹${p.price.toLocaleString("en-IN")}</h4>
+          ${p.oldPrice ? `<del class="text-muted">₹${p.oldPrice.toLocaleString("en-IN")}</del>` : ""}
+          <br><br>
+          <button class="btn btn-warning w-100 mb-2" ${Number(p.stock ?? 10) === 0 ? "disabled" : ""}
+            onclick="addToCart('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.image}')">
+            Add to Cart
+          </button>
+          <button class="btn btn-success w-100"
+            onclick="buyNow('${p.name.replace(/'/g,"\\'")}', ${p.price}, '${p.image}')">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  row.innerHTML = html;
+}
+
+renderProducts();
+
+function addToCart(name, price, image){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let index = cart.findIndex(item => item.name === name);
+
+    if(index > -1){
+        cart[index].quantity++;
+    }else{
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " Added to Cart");
+
+    window.location.href = "{% url 'cart' %}";
+}
+function buyNow(name, price, image){
+
+    const product = {
+        name: name,
+        price: price,
+        image: image,
+        quantity: 1
+    };
+
+    localStorage.setItem("buyNowProduct", JSON.stringify(product));
+    localStorage.setItem("checkoutMode", "buy-now");
+    window.location.href = "{% url 'checkout' %}";
+}
+</script>
+</body>
+</html>
