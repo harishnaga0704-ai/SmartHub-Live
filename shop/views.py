@@ -8,6 +8,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import json
 from datetime import timedelta
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -19,6 +20,7 @@ import tempfile
 import os
 from .models import Customer, Product, Order
 from .forms import ProductForm, SaleForm
+
 
 
 @login_required
