@@ -1,11 +1,2 @@
-env/
-.venv/
-__pycache__/
-*.py[cod]
-*.sqlite3
-.env
-media/
-staticfiles/
-# Local secrets and generated files
-*.log
-
+.vercel
+.env*

@@ -14,7 +14,7 @@
 <body class="bg-light"><main class="container py-5">
     <a href="{% url 'index' %}" class="btn btn-outline-dark mb-4">&larr; Back to products</a>
     <div class="card shadow-sm border-0"><div class="card-body p-4 p-md-5"><div class="row g-5">
-        <section class="col-md-6"><img id="mainImage" class="main-image rounded" src="{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/600x600?text=No+Image{% endif %}" alt="{{ product.name }}">
+        <section class="col-md-6"><img id="mainImage" class="main-image rounded" src="{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/600/600/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}" alt="{{ product.name }}">
             <div class="d-flex flex-wrap gap-2 mt-3">
                 {% if product.image %}<button class="btn btn-light p-1 text-center" type="button" onclick="setImage('{{ product.image.url }}')"><img class="view-thumb" src="{{ product.image.url }}" alt="Main view"><small class="d-block">Main</small></button>{% endif %}
                 {% for product_image in product.detail_images.all %}<button class="btn btn-light p-1 text-center" type="button" onclick="setImage('{{ product_image.image.url }}')"><img class="view-thumb" src="{{ product_image.image.url }}" alt="{{ product_image.get_view_name_display }}"><small class="d-block">{{ product_image.get_view_name_display }}</small></button>{% endfor %}
@@ -28,7 +28,7 @@
         </section>
     </div></div></div>
 </main><script>
-const product = { product_id: {{ product.id }}, name: "{{ product.name|escapejs }}", price: {{ product.offer_price|default:product.price }}, image: "{% if product.image %}{{ product.image.url }}{% endif %}", quantity: 1 };
+const product = { product_id: {{ product.id }}, name: "{{ product.name|escapejs }}", price: {{ product.offer_price|default:product.price }}, image: "{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/600/600/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}", quantity: 1 };
 function setImage(url) { document.getElementById('mainImage').src = url; }
 function addToCart() { const cart = JSON.parse(localStorage.getItem('cart') || '[]'); const found = cart.find(item => item.product_id === product.product_id); if (found) found.quantity++; else cart.push(product); localStorage.setItem('cart', JSON.stringify(cart)); window.location.href = "{% url 'cart' %}"; }
 function buyNow() { localStorage.setItem('buyNowProduct', JSON.stringify(product)); localStorage.setItem('checkoutMode', 'buy-now'); window.location.href = "{% url 'checkout' %}"; }

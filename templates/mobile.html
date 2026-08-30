@@ -149,7 +149,7 @@ products.push({
   discount: "{% if product.discount_percent %}{{ product.discount_percent }}% OFF{% endif %}",
   rating: {{ product.rating|default:5|floatformat:"0" }},
   stock: {{ product.stock|default:0 }},
-  image: "{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/300x300?text=No+Image{% endif %}"
+  image: "{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/600/600/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}"
 });
 {% endfor %}
 

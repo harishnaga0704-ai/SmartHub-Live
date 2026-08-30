@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import shutil
+from urllib.parse import unquote, urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,17 +74,48 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'smarthub'),
-        'USER': os.getenv('DB_USER', 'harish'),
-        'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+database_url = os.getenv('DATABASE_URL', '')
+parsed_database_url = urlparse(database_url) if database_url.startswith(('mysql://', 'mysql+pymysql://', 'postgres://', 'postgresql://')) else None
+db_engine = os.getenv('DB_ENGINE', 'sqlite').lower()
+if parsed_database_url:
+    is_mysql = parsed_database_url.scheme in ('mysql', 'mysql+pymysql')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql' if is_mysql else 'django.db.backends.postgresql',
+            'NAME': unquote(parsed_database_url.path.lstrip('/')),
+            'USER': unquote(parsed_database_url.username or ''),
+            'PASSWORD': unquote(parsed_database_url.password or ''),
+            'HOST': parsed_database_url.hostname,
+            'PORT': parsed_database_url.port or ('3306' if is_mysql else '5432'),
+            'OPTIONS': {} if is_mysql else {'sslmode': 'require'},
+        }
     }
-}
+elif db_engine == 'mysql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('DB_NAME', 'smarthub'),
+            'USER': os.getenv('DB_USER', 'harish'),
+            'PASSWORD': os.getenv('DB_PASSWORD', ''),
+            'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+            'PORT': os.getenv('DB_PORT', '3306'),
+        }
+    }
+else:
+    sqlite_path = BASE_DIR / 'db.sqlite3'
+    if os.getenv('VERCEL') and sqlite_path.exists():
+        temp_directory = os.getenv('TMPDIR') or os.getenv('TEMP') or '/tmp'
+        writable_sqlite_path = Path(temp_directory) / 'smartsy.sqlite3'
+        if not writable_sqlite_path.exists():
+            shutil.copy2(sqlite_path, writable_sqlite_path)
+        sqlite_path = writable_sqlite_path
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': sqlite_path,
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -119,6 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

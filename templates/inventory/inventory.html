@@ -147,13 +147,8 @@ body{background:#f4f6f9}
                 data-stock="{{ product.stock|default:0 }}">
                 <td>
                     <div class="d-flex align-items-center gap-2">
-                        {% if product.image %}
-                            <img src="{{ product.image.url }}" class="product-img">
-                        {% else %}
-                            <div class="product-img d-flex align-items-center justify-content-center">
-                                <i class="bi bi-image text-muted"></i>
-                            </div>
-                        {% endif %}
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/300/300/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}"
+                             class="product-img" alt="{{ product.name }}">
                         <div>
                             <div class="fw-bold">{{ product.name }}</div>
                             <small class="text-muted">ID: {{ product.id }}</small>

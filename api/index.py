@@ -1,15 +1,10 @@
-import sys
 import os
+import sys
 from pathlib import Path
 
-# Add the project directory to the Python path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# Set Django settings module
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-
-import django
-django.setup()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 from config.wsgi import application
 

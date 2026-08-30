@@ -68,11 +68,14 @@ urlpatterns = [
 
     # Main Pages
     path("mobile/", views.mobile, name="mobile"),
+    path("laptop/", views.laptop, name="laptop_legacy"),
     path("laptops/", views.laptop, name="laptops"),
+    path("products/", views.category_products, {"category": "all"}, name="products_legacy"),
     path("headphones/", views.headphones, name="headphones"),
     path("smart/", views.smart, name="smart"),
     path("checkout/", views.checkout, name="checkout"),
     path("cart/", views.cart, name="cart"),
+    path("Cart/", views.cart, name="cart_legacy"),
     path("orders/place/", views.place_order, name="place_order"),
     path("orders/notifications/", views.order_notifications, name="order_notifications"),
     path("orders/<int:id>/notification/", views.order_notification, name="order_notification"),

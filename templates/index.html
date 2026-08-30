@@ -851,15 +851,6 @@
                 <li class="nav-item">
                     <a
                         class="nav-link"
-                        href="{% url 'smart' %}"
-                    >
-                        Smart Watches
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a
-                        class="nav-link"
                         href="{% url 'cart' %}"
                     >
                         Cart
@@ -932,7 +923,7 @@
 
                 <p>
                     Discover the latest mobiles, laptops,
-                    headphones and smart watches at
+                    headphones and mobile accessories at
                     amazing prices.
                 </p>
 
@@ -1054,7 +1045,7 @@
             </div>
 
 
-            <!-- Smart Watch -->
+            <!-- Smart Watches -->
 
             <div class="col-6 col-md-3">
 
@@ -1082,6 +1073,7 @@
                 </a>
 
             </div>
+
 
         </div>
 
@@ -1287,12 +1279,11 @@ const featuredProducts = [
 
 ];
 
-/* Includes every static product on Mobile, Laptop, Headphones and Smart Watch pages. */
+/* Includes every static product on Mobile, Laptop and Headphones pages. */
 const categoryCatalogueProducts = [
     ...["iPhone 16", "Samsung S25 Ultra", "Google Pixel 9 Pro", "OnePlus 13", "Xiaomi 15", "Vivo X200 Pro", "Oppo Find X8 Pro", "Realme GT 7 Pro", "Nothing Phone 3", "Motorola Edge 60 Pro", "iQOO 13", "Redmi Note 14 Pro+"].map(name => ({ name, category: "Mobile", url: "{% url 'mobile' %}" })),
     ...["MacBook Air M4", "Dell XPS 14", "HP Spectre x360", "Lenovo Legion Pro 7", "ASUS ROG Zephyrus G16", "Acer Predator Neo 16", "MSI Raider GE78", "Galaxy Book5 Pro", "HP Victus 15", "ASUS Vivobook S15", "Lenovo IdeaPad Slim 5", "Dell Inspiron 15"].map(name => ({ name, category: "Laptop", url: "{% url 'laptops' %}" })),
     ...["Sony WH-1000XM5", "Apple AirPods Max", "Bose QC Ultra", "JBL Tour One M2", "Sennheiser Momentum 4", "Beats Studio Pro", "boAt Nirvana 751 ANC", "Skullcandy Crusher Evo", "Soundcore Q45", "Logitech G733", "Razer BlackShark V2 Pro", "Sony INZONE H9"].map(name => ({ name, category: "Headphones", url: "{% url 'headphones' %}" })),
-    ...["Apple Watch Series 10", "Samsung Galaxy Watch Ultra", "Garmin Venu 3", "Amazfit Balance", "OnePlus Watch 2", "Noise ColorFit Pro 6", "boAt Lunar Pro LTE", "Fire-Boltt Dream", "Fitbit Versa 4", "Huawei Watch GT 5", "CMF Watch Pro 2", "Xiaomi Watch S4"].map(name => ({ name, category: "Smart Watch", url: "{% url 'smart' %}" })),
 ];
 
 // Products added through Inventory are rendered with the same product cards
@@ -1306,7 +1297,7 @@ const inventoryCardProducts = [
         price: {% if product.offer_price %}{{ product.offer_price }}{% else %}{{ product.price }}{% endif %},
         rating: {{ product.rating }},
         stock: {{ product.stock }},
-        image: "{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/300x300?text=No+Image{% endif %}"
+        image: "{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/600/600/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}"
     },
     {% endfor %}
 ];
@@ -1335,6 +1326,7 @@ function renderFeaturedProducts() {
                     <img
                         src="${product.image}"
                         alt="${product.name}"
+                        onerror="this.onerror=null; this.src='https://loremflickr.com/600/600/' + encodeURIComponent('${product.name}') + ',electronics?lock=' + product.id;"
                     >
 
                     <div class="card-body d-flex flex-column">
@@ -1447,7 +1439,7 @@ function addToCart(productId, name, price, image) {
 
 const databaseProducts = [
     ...featuredProducts.map(product => ({ ...product, brand: "" })),
-    ...categoryCatalogueProducts.map(product => ({ ...product, brand: "", image: "https://placehold.co/100x100?text=Product" })),
+    ...categoryCatalogueProducts.map(product => ({ ...product, brand: "", image: `https://loremflickr.com/100/100/${encodeURIComponent(product.name)},electronics?lock=${encodeURIComponent(product.name)}` })),
     {% for product in products %}
     {
         id: {{ product.id }},
@@ -1455,7 +1447,7 @@ const databaseProducts = [
         category: "{{ product.category|escapejs }}",
         brand: "{{ product.brand|escapejs }}",
         price: {% if product.offer_price %}{{ product.offer_price }}{% else %}{{ product.price }}{% endif %},
-        image: "{% if product.image %}{{ product.image.url }}{% else %}https://placehold.co/100x100?text=Product{% endif %}"
+        image: "{% if product.image %}{{ product.image.url }}{% else %}https://loremflickr.com/100/100/{{ product.name|urlencode }},electronics?lock={{ product.id }}{% endif %}"
     },
     {% endfor %}
 ];
