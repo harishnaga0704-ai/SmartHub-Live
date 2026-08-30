@@ -347,10 +347,14 @@ def headphones(request):
 
 @login_required
 def smart(request):
-    db_products = Product.objects.filter(Q(category__iexact="smart watch") | Q(category__iexact="smart watches") | Q(category__iexact="smart"))
-    for p in db_products:
-        if p.offer_price and p.price > p.offer_price:
-            p.discount_percent = int(((p.price - p.offer_price) / p.price) * 100)
+    db_products = Product.objects.filter(
+        Q(category__iexact="smart watch")
+        | Q(category__iexact="smart watches")
+        | Q(category__iexact="smart")
+    )
+    for product in db_products:
+        if product.offer_price and product.price > product.offer_price:
+            product.discount_percent = int(((product.price - product.offer_price) / product.price) * 100)
     return render(request, "smart.html", {"db_products": db_products})
 
 

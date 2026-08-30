@@ -5,6 +5,19 @@ from django.conf import settings
 from django.db import migrations, models
 
 
+def ensure_order_status_column(apps, schema_editor):
+    Order = apps.get_model("shop", "Order")
+    with schema_editor.connection.cursor() as cursor:
+        columns = {
+            column.name
+            for column in schema_editor.connection.introspection.get_table_description(
+                cursor, Order._meta.db_table
+            )
+        }
+    if "status" not in columns:
+        schema_editor.add_field(Order, Order._meta.get_field("status"))
+
+
 def link_existing_orders(apps, schema_editor):
     Customer = apps.get_model("shop", "Customer")
     Order = apps.get_model("shop", "Order")
@@ -30,6 +43,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(ensure_order_status_column, migrations.RunPython.noop),
         migrations.CreateModel(
             name='Customer',
             fields=[

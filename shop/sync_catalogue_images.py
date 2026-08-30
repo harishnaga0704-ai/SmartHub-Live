@@ -27,7 +27,7 @@ from shop.models import Product
 
 TEMPLATES = [
     ROOT / "templates" / name
-    for name in ("products.html", "mobile.html", "laptops.html", "headphones.html", "smart.html")
+    for name in ("products.html", "mobile.html", "laptops.html", "headphones.html")
 ]
 OUTPUT_DIR = Path(settings.MEDIA_ROOT) / "products" / "catalogue"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
