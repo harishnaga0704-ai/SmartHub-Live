@@ -11,7 +11,7 @@ venv/
 .idea/
 
 # Database
-db.sqlite3
+# db.sqlite3 — must be deployed so Vercel can copy it to /tmp
 
 # Git
 .git/
