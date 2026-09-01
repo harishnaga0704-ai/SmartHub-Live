@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jb*2x-*g0uj$s=joxq+$2q=ww@k%n1*sk-&c53@++_zh$u2mkh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 'yes')
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '*').split(',') if host.strip()]
 
@@ -167,11 +167,21 @@ STORAGES = {
 }
 
 # Vercel / production CSRF trust
+_csrf_env = os.getenv('CSRF_TRUSTED_ORIGINS', '')
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
-    for origin in os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',')
+    for origin in _csrf_env.split(',')
     if origin.strip()
 ]
+# Always trust the Vercel deployment domain
+_vercel_url = os.getenv('VERCEL_URL', '')
+if _vercel_url:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{_vercel_url}')
+# Add known production domains
+for _domain in ['https://smaathub-2ymu.vercel.app', 'http://localhost:8000']:
+    if _domain not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(_domain)
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ROOT_URLCONF = "config.urls"
 
