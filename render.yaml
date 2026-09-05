@@ -1,6 +1,6 @@
-﻿services:
+services:
   - type: web
-    name: smarthub
+    name: smartsy
     runtime: python
     plan: free
     buildCommand: "./build.sh"

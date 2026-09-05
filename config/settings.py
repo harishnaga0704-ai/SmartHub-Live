@@ -176,6 +176,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.vercel.app',
     'https://*.now.sh',
     'https://*.onrender.com',
+    'https://smartsy.onrender.com',
 ]
 
 if not DEBUG and not LOCAL_DEV:
