@@ -12,14 +12,19 @@ from datetime import timedelta
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, get_user_model
 from django.db import transaction
 from django.core.management import call_command
 from io import StringIO
 import tempfile
 import os
-from .models import Customer, Product, Order
+import zipfile
+import shutil
+from pathlib import Path
+from .models import Customer, Product, Order, ProductImage
 from .forms import ProductForm, SaleForm
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
@@ -102,9 +107,52 @@ def customer_master(request):
 def backup_restore(request):
     if request.method == "POST":
         backup_file = request.FILES.get("backup_file")
-        if not backup_file or not backup_file.name.lower().endswith(".json"):
-            messages.error(request, "Please upload a JSON backup file.")
+        if not backup_file:
+            messages.error(request, "Please upload a backup file.")
             return redirect("backup_restore")
+
+        name = backup_file.name.lower()
+        if name.endswith(".zip"):
+            temporary_path = None
+            temp_extract_dir = None
+            try:
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".zip") as temporary_file:
+                    for chunk in backup_file.chunks():
+                        temporary_file.write(chunk)
+                    temporary_path = temporary_file.name
+
+                temp_extract_dir = Path(tempfile.mkdtemp(prefix="smarthub_restore_"))
+                with zipfile.ZipFile(temporary_path, "r") as archive:
+                    archive.extractall(temp_extract_dir)
+
+                for extracted_file in temp_extract_dir.rglob("*"):
+                    if extracted_file.is_dir():
+                        continue
+                    relative_path = extracted_file.relative_to(temp_extract_dir)
+                    destination = BASE_DIR / relative_path
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(extracted_file, destination)
+
+                messages.success(request, "Full project backup restored successfully.")
+            except Exception as error:
+                messages.error(request, f"Restore failed: {error}")
+            finally:
+                if temporary_path:
+                    try:
+                        os.unlink(temporary_path)
+                    except OSError:
+                        pass
+                if temp_extract_dir:
+                    try:
+                        shutil.rmtree(temp_extract_dir)
+                    except OSError:
+                        pass
+            return redirect("backup_restore")
+
+        if not name.endswith(".json"):
+            messages.error(request, "Please upload a valid backup file (.json or .zip).")
+            return redirect("backup_restore")
+
         if backup_file.size > 25 * 1024 * 1024:
             messages.error(request, "Backup file must be smaller than 25 MB.")
             return redirect("backup_restore")
@@ -115,8 +163,15 @@ def backup_restore(request):
                 for chunk in backup_file.chunks():
                     temporary_file.write(chunk)
                 temporary_path = temporary_file.name
+
             with transaction.atomic():
+                Order.objects.all().delete()
+                ProductImage.objects.all().delete()
+                Customer.objects.all().delete()
+                Product.objects.all().delete()
+                get_user_model().objects.all().delete()
                 call_command("loaddata", temporary_path, verbosity=0)
+
             messages.success(request, "Database backup restored successfully.")
         except Exception as error:
             messages.error(request, f"Restore failed: {error}")
@@ -134,19 +189,22 @@ def backup_restore(request):
 @login_required
 @user_passes_test(lambda user: user.is_staff)
 def download_backup(request):
-    output = StringIO()
-    call_command(
-        "dumpdata",
-        "shop",
-        "auth.user",
-        exclude=["contenttypes", "auth.permission", "sessions"],
-        natural_foreign=True,
-        natural_primary=True,
-        indent=2,
-        stdout=output,
-    )
-    response = HttpResponse(output.getvalue(), content_type="application/json")
-    response["Content-Disposition"] = 'attachment; filename="smartsy-backup.json"'
+    buffer = tempfile.SpooledTemporaryFile(max_size=10 * 1024 * 1024)
+    with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for root, dirs, files in os.walk(BASE_DIR):
+            dirs[:] = [
+                d for d in dirs
+                if d not in {".git", ".idea", ".vscode", "__pycache__", ".pytest_cache", "env", "node_modules"}
+            ]
+            for filename in files:
+                if filename.endswith((".pyc", ".pyo", ".sqlite3-shm", ".sqlite3-wal")):
+                    continue
+                path = Path(root) / filename
+                archive.write(path, arcname=str(path.relative_to(BASE_DIR)))
+
+    buffer.seek(0)
+    response = HttpResponse(buffer.read(), content_type="application/zip")
+    response["Content-Disposition"] = 'attachment; filename="smarthub-complete-backup.zip"'
     return response
 
 
